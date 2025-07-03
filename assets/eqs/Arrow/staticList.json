@@ -1,0 +1,110 @@
+[{
+    "id"        : "gets",
+    "symbol"     : "←",
+    "name"      : "Left Arrow"
+},
+{
+    "id"        : "to",
+    "symbol"     : "→",
+    "name"      : "Right Arrow"
+},
+{
+    "id"        : "uparrow",
+    "symbol"     : "↑",
+    "name"      : "Up Arrow"
+},
+{
+    "id"        : "downarrow",
+    "symbol"     : "↓",
+    "name"      : "Down Arrow"
+},
+{
+    "id"        : "leftrightarrow",
+    "symbol"     : "↔",
+    "name"      : "Left-Right Arrow"
+},
+{
+    "id"        : "updownarrow",
+    "symbol"     : "↕",
+    "name"      : "Up-Down Arrow"
+},
+{
+    "id"        : "leftdoublearrow",
+    "symbol"     : "⇐",
+    "name"      : "Left Double Arrow"
+},
+{
+    "id"        : "rightdoublearrow",
+    "symbol"     : "⇒",
+    "name"      : "Right Double Arrow"
+},
+{
+    "id"        : "updoublearrow",
+    "symbol"     : "⇑",
+    "name"      : "Up Double Arrow"
+},
+{
+    "id"        : "downdoublearrow",
+    "symbol"     : "⇓",
+    "name"      : "Down Double Arrow"
+},
+{
+    "id"        : "leftrightdoublearrow",
+    "symbol"     : "⇔",
+    "name"      : "Left-Right Double Arrow"
+},
+{
+    "id"        : "updowndoublearrow",
+    "symbol"     : "⇕",
+    "name"      : "Up Down Double Arrow"
+},
+{
+    "id"        : "longleftarrow",
+    "symbol"     : "⟵",
+    "name"      : "Long Left Arrow"
+},
+{
+    "id"        : "longrightarrow",
+    "symbol"     : "⟶",
+    "name"      : "Long Right Arrow"
+},
+{
+    "id"        : "longleftrightarrow",
+    "symbol"     : "⟷",
+    "name"      : "Long Left-Right Arrow"
+},
+{
+    "id"        : "longleftdoublearrow",
+    "symbol"     : "⟸",
+    "name"      : "Long Left Double Arrow"
+},
+{
+    "id"        : "longrightdoublearrow",
+    "symbol"     : "⟹",
+    "name"      : "Long Right Double Arrow"
+},
+{
+    "id"        : "longleftrightdoublearrow",
+    "symbol"     : "⟺",
+    "name"      : "Long Left-Right Double Arrow"
+},
+{
+    "id"        : "northeastarrow",
+    "symbol"     : "↗",
+    "name"      : "North East Arrow"
+},
+{
+    "id"        : "northwestarrow",
+    "symbol"     : "&#8598;",
+    "name"      : "North West Arrow"
+},
+{
+    "id"        : "southeastarrow",
+    "symbol"     : "↘",
+    "name"      : "South East Arrow"
+},
+{
+    "id"        : "southwestarrow",
+    "symbol"     : "↙",
+    "name"      : "South West Arrow"
+}]

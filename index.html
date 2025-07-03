@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 Math - Getting Started</title>
+    <link rel="shortcut icon" href="./assets/logo.png" type="image/x-icon">
+    <style>
+        .jumbotron > h3 {
+            margin: 0;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <header class="jumbotron text-light bg-info p-3">
+            <h1 class="text-center font-weight-bold text-uppercase">Welcome to Equation Editor - 7MATH</h1>
+        </header>
+        <main>
+            <section class="editorShow jumbotron bg-light p-1">
+                <div id="editorContainer"></div>
+                <div class="btn btn-block btn-success" style="display: none;" onclick="handleSubmitData()">Preview Data</div>
+            </section>
+            <section class="whatIsThis jumbotron bg-white text-center">
+                <h3 class="text-uppercase text-info font-weight-bold">What Is This?</h3>
+                <hr style="width: 100px; border: 2px dashed #000;" />
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="./assets/what.jpg" alt="what" width="100%">
+                    </div>
+                    <div class="col-md-8" >
+                        <p class="text-justify" style="text-indent: 30px;">Just a step into the topic of Education, in the process of organizing exams, or composing scientific expressions on computer today, almost Editors that appeared before, were responding to many functions which are able to input text, number, with some special character that list on ASCII table. Problem is, when the Mathematical formulas have its complexity, requiring a tool can support the user typing data in a convenient way, instead of drawing in the third application, then import to the project as an image, or even not able to control to edit as well as display the similar type of data.</p>
+                        <p class="text-justify" style="text-indent: 30px;">Supporting input complex data as Maths and Sciences Equation is our tool main idea. Not only text, digits, special character, but also all complex equations can be support on our tool!</p>
+                    </div>
+                </div>
+            </section>
+            <section class="whyUseIt jumbotron text-center">
+                <h3 class="text-uppercase text-info font-weight-bold">Why Use It?</h3>
+                <hr style="width: 100px; border: 2px dashed #000;" />
+                <div class="row">
+                    <div class="col-md-8">
+                        <p class="text-justify" style="text-indent: 30px;">The project: “Processing Mathematical Formula on Web Form platform” is proceeded to serve the needs of inputting Mathematical formulas, or scientific expressions on computers, including some complex formulas as square root of 2, logarithmic, integration, etc.</p>
+                        <p class="text-justify" style="text-indent: 30px;">As using this tool, teachers, students, scientists can easily create tests, or documentations on their own, for their courses,...</p>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="./assets/why.jpg" alt="what" width="100%">
+                    </div>
+                </div>
+            </section>
+            <section class="how2Use jumbotron bg-white text-center">
+                <h3 class="text-uppercase text-info font-weight-bold">How to Use?</h3>
+                <hr style="width: 100px; border: 2px dashed #000;" />
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <img src="./assets/how.jpg" alt="what" width="70%">
+                    </div>
+                    <div class="col-md-8">
+                        <p class="text-justify" style="text-indent: 30px;">As a Web Form platform tool, users only need a smart device that has connection to the internet, then they can use it. This tool was responsive for many devices, with a friendly interface, saving time in drafting scientific expressions, increasing productivity and quality of study and research work.</p>
+                    </div>
+                    
+                </div>
+
+                <!-- <hr style="width: 100px;" />
+                <h4 class="text-center btn btn-block btn-disabled btn-success">Current Supported Browser</h4>
+                <div class="row">
+                    <div class="col-6 text-center">
+                        <div class="badge badge-info">Firefox</div>
+                        <img class="p-3" src="./assets/firefox_logo.png" alt="Firefox Logo" width="100px" />
+                    </div>
+                    <div class="col-6 text-center">
+                        <div class="badge badge-info">Safari</div>
+                        <img class="p-3" src="./assets/safari_logo.png" alt="Safari Logo" width="100px" />
+                    </div>
+                </div> -->
+            </section>
+            <section class="installNow jumbotron text-center">
+                <h3 class="text-uppercase text-info font-weight-bold">Installing guide step by step</h3>
+                <hr style="width: 100px; border: 2px dashed #000;" />
+                <div class="text-justity">
+                    <p class="bg-success p-1 rounded text-light">Step 01: Place Jquery, Poper JS, 7math JS right before end tag of body!</p>
+                    <script async src="//jsfiddle.net/baynv910/L8sdwe1x/embed/html/"></script>
+                    <p class="bg-success p-1 rounded text-light">Step 02: Place this code where you want this tool display in your web page!</p>
+                    <script async src="//jsfiddle.net/baynv910/61Lapdo4/1/embed/html/"></script>
+                    <p class="bg-success p-1 rounded text-light">Step 03: Get the result by assign a variable to <span class="text-warning">submitedData()</span>. For example, create a function name <span class="text-warning">handleSubmitData()</span>. Then put the results we got to an input box with <span class="text-warning">id="submitedData"</span></p>
+                    <script async src="//jsfiddle.net/baynv910/dr9aec7q/embed/html/"></script>
+            
+                </div>
+            </section>
+            <section class="text-center">
+                <h3 class="text-uppercase text-info font-weight-bold">DEMO ON PHP PROJECT</h3>
+                <hr style="width: 100px; border: 2px dashed #000;" />
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/JP8NEzRh54w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </section>
+        </main>
+        <footer class="jumbotron p-2 text-center m-0 mt-1 mb-1 bg-dark text-white">
+            Copyright &copy; 2021. All right reserved.
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" type="text/javascript"></script>
+    <script src="./7math.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        // Handle data submit from 7Math
+        handleSubmitData = () => {
+            let myData = submitedData();
+            alert(myData);
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,186 @@
+[{
+    "id"        : "pm",
+    "symbol"     : "±",
+    "name"      : "Plus Minus"
+},
+{
+    "id"        : "infty",
+    "symbol"     : "∞",
+    "name"      : "Infinity"
+},
+{
+    "id"        : "equal",
+    "symbol"     : "=",
+    "name"      : "Equal"
+},
+{
+    "id"        : "neq",
+    "symbol"     : "≠",
+    "name"      : "Not Equal To"
+},
+{
+    "id"        : "approximately",
+    "symbol"     : "~",
+    "name"      : "Approximately"
+},
+{
+    "id"        : "times",
+    "symbol"     : "×",
+    "name"      : "Multiplication Sign"
+},
+{
+    "id"        : "div",
+    "symbol"     : "÷",
+    "name"      : "Division Sign"
+},
+{
+    "id"        : "factorial",
+    "symbol"     : "!",
+    "name"      : "Factorial"
+},
+{
+    "id"        : "propto",
+    "symbol"     : "∝",
+    "name"      : "Proportional To"
+},
+{
+    "id"        : "lessthan",
+    "symbol"     : "&lt;",
+    "name"      : "Less Than"
+},
+{
+    "id"        : "ll",
+    "symbol"     : "≪",
+    "name"      : "Much Less Than"
+},
+{
+    "id"        : "greaterthan",
+    "symbol"     : "&gt;",
+    "name"      : "Greater Than"
+},
+{
+    "id"        : "gg",
+    "symbol"     : "≫",
+    "name"      : "Much Greater Than"
+},
+{
+    "id"        : "leq",
+    "symbol"     : "≤",
+    "name"      : "Less Than Or Equal To"
+},
+{
+    "id"        : "geq",
+    "symbol"     : "≥",
+    "name"      : "Greater Than Or Equal To"
+},
+{
+    "id"        : "mp",
+    "symbol"     : "∓",
+    "name"      : "Minus Plus"
+},
+{
+    "id"        : "cong",
+    "symbol"     : "≅",
+    "name"      : "Approximately Equal To"
+},
+{
+    "id"        : "approx",
+    "symbol"     : "≈",
+    "name"      : "Almost Equal To (Asymptotic To)"
+},
+{
+    "id"        : "equiv",
+    "symbol"     : "≡",
+    "name"      : "Identical To"
+},
+{
+    "id"        : "forall",
+    "symbol"     : "∀",
+    "name"      : "For All"
+},
+{
+    "id"        : "complement",
+    "symbol"     : "∁",
+    "name"      : "Complement"
+},
+{
+    "id"        : "partial",
+    "symbol"     : "∂",
+    "name"      : "Partial Differential"
+},
+{
+    "id"        : "sqrt",
+    "symbol"     : "√",
+    "name"      : "Radical Sign"
+},
+{
+    "id"        : "cbrt",
+    "symbol"     : "∛",
+    "name"      : "Cube Root"
+},
+{
+    "id"        : "qdrt",
+    "symbol"     : "∜",
+    "name"      : "Fourth Root"
+},
+{
+    "id"        : "cup",
+    "symbol"     : "∪",
+    "name"      : "Union"
+},
+{
+    "id"        : "cap",
+    "symbol"     : "∩",
+    "name"      : "Intersection"
+},
+{
+    "id"        : "emptyset",
+    "symbol"     : "∅",
+    "name"      : "Empty Set"
+},
+{
+    "id"        : "percentage",
+    "symbol"     : "%",
+    "name"      : "Percentage"
+},
+{
+    "id"        : "degree",
+    "symbol"     : "°",
+    "name"      : "Degrees"
+},
+{
+    "id"        : "degf",
+    "symbol"     : "℉",
+    "name"      : "Degrees Fahreheit"
+},
+{
+    "id"        : "degc",
+    "symbol"     : "℃",
+    "name"      : "Degrees Celcius"
+},
+{
+    "id"        : "inc",
+    "symbol"     : "∆",
+    "name"      : "Increment"
+},
+{
+    "id"        : "nabla",
+    "symbol"     : "∇",
+    "name"      : "Nabla"
+},
+{
+    "id"        : "exists",
+    "symbol"     : "∃",
+    "name"      : "There exists"
+},
+{
+    "id"        : "theredoesnotexist",
+    "symbol"     : "∄",
+    "name"      : "There Does Not Exist"
+},
+{
+    "id"        : "in",
+    "symbol"     : "∈",
+    "name"      : "Element Of"
+}
+]

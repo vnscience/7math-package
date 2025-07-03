@@ -1,0 +1,75 @@
+[{
+    "id"        : "rightangle",
+    "symbol"     : "∟",
+    "name"      : "Right Angle"
+},
+{
+    "id"        : "angle",
+    "symbol"     : "∠",
+    "name"      : "Angle"
+},
+{
+    "id"        : "measuredangle",
+    "symbol"     : "∡",
+    "name"      : "Measured Angle"
+},
+{
+    "id"        : "sphericalangle",
+    "symbol"     : "∢",
+    "name"      : "Spherical Angle"
+},
+{
+    "id"        : "rightanglewitharc",
+    "symbol"     : "⊾",
+    "name"      : "Right Angle with Arc"
+},
+{
+    "id"        : "righttriangle",
+    "symbol"     : "⊿",
+    "name"      : "Right Triangle"
+},
+{
+    "id"        : "equalandparallelto",
+    "symbol"     : "⋕",
+    "name"      : "Equal and Parallel to"
+},
+{
+    "id"        : "perpendicularto",
+    "symbol"     : "⊥",
+    "name"      : "Perpendicular to"
+},
+{
+    "id"        : "doesnotdivide",
+    "symbol"     : "∤",
+    "name"      : "Does Not Divide"
+},
+{
+    "id"        : "parallelto",
+    "symbol"     : "∥",
+    "name"      : "Parallel to"
+},
+{
+    "id"        : "notparallelto",
+    "symbol"     : "∦",
+    "name"      : "Not Parallel To"
+},
+{
+    "id"        : "ratio",
+    "symbol"     : "∶",
+    "name"      : "Ratio"
+},
+{
+    "id"        : "proportion",
+    "symbol"     : "∷",
+    "name"      : "Proportion"
+},
+{
+    "id"        : "therefor",
+    "symbol"     : "∴",
+    "name"      : "Therefore"
+},
+{
+    "id"        : "endofproof",
+    "symbol"     : "∎",
+    "name"      : "End of Proof"
+}]

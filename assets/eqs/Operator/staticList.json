@@ -1,0 +1,90 @@
+[{
+    "id"        : "plus",
+    "symbol"     : "+",
+    "name"      : "Plus"
+},
+{
+    "id"        : "minus",
+    "symbol"     : "−",
+    "name"      : "Minus"
+},
+{
+    "id"        : "div",
+    "symbol"     : "÷",
+    "name"      : "Division Sign"
+},
+{
+    "id"        : "times",
+    "symbol"     : "×",
+    "name"      : "Mutiplication Sign"
+},
+{
+    "id"        : "pm",
+    "symbol"     : "±",
+    "name"      : "Plus Minus"
+},
+{
+    "id"        : "mp",
+    "symbol"     : "∓",
+    "name"      : "Minus Plus"
+},
+{
+    "id"        : "propto",
+    "symbol"     : "∝",
+    "name"      : "Proportional To"
+},
+{
+    "id"        : "ldiv",
+    "symbol"     : "∕",
+    "name"      : "Division Slash"
+},
+{
+    "id"        : "ast",
+    "symbol"     : "∗",
+    "name"      : "Asterisk Operator"
+},
+{
+    "id"        : "circ",
+    "symbol"     : "∘",
+    "name"      : "Composite Function"
+},
+{
+    "id"        : "bullet",
+    "symbol"     : "∙",
+    "name"      : "Composite Function"
+},
+{
+    "id"        : "cap",
+    "symbol"     : "∩",
+    "name"      : "Intersection"
+},
+{
+    "id"        : "cup",
+    "symbol"     : "∪",
+    "name"      : "Union"
+},
+{
+    "id"        : "uplus",
+    "symbol"     : "⊎",
+    "name"      : "MULTISET UNION"
+},
+{
+    "id"        : "sqcap",
+    "symbol"     : "⊓",
+    "name"      : "SQUARE CAP"
+},
+{
+    "id"        : "sqcup",
+    "symbol"     : "⊔",
+    "name"      : "SQUARE CUP"
+},
+{
+    "id"        : "wedge",
+    "symbol"     : "⋀",
+    "name"      : "LOGICAL AND"
+},
+{
+    "id"        : "vee",
+    "symbol"     : "⋁",
+    "name"      : "LOGICAL OR"
+}]

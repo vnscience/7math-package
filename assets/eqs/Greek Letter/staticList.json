@@ -1,0 +1,120 @@
+[{
+    "id"        : "alpha",
+    "symbol"     : "α",
+    "name"      : "Alpha"
+},
+{
+    "id"        : "beta",
+    "symbol"     : "β",
+    "name"      : "Beta"
+},
+{
+    "id"        : "gamma",
+    "symbol"     : "γ",
+    "name"      : "Gamma"
+},
+{
+    "id"        : "delta",
+    "symbol"     : "δ",
+    "name"      : "Delta"
+},
+{
+    "id"        : "epsilon",
+    "symbol"     : "ε",
+    "name"      : "Epsilon"
+},
+{
+    "id"        : "zeta",
+    "symbol"     : "ζ",
+    "name"      : "Zeta"
+},
+{
+    "id"        : "eta",
+    "symbol"     : "η",
+    "name"      : "Eta"
+},
+{
+    "id"        : "theta",
+    "symbol"     : "θ",
+    "name"      : "Theta"
+},
+{
+    "id"        : "iota",
+    "symbol"     : "ι",
+    "name"      : "Iota"
+},
+{
+    "id"        : "kappa",
+    "symbol"     : "κ",
+    "name"      : "Kappa"
+},
+{
+    "id"        : "lambda",
+    "symbol"     : "λ",
+    "name"      : "Lambda"
+},
+{
+    "id"        : "mu",
+    "symbol"     : "μ",
+    "name"      : "Mu"
+},
+{
+    "id"        : "nu",
+    "symbol"     : "ν",
+    "name"      : "Nu"
+},
+{
+    "id"        : "xi",
+    "symbol"     : "ξ",
+    "name"      : "Xi"
+},
+{
+    "id"        : "omicron",
+    "symbol"     : "o",
+    "name"      : "Omicron"
+},
+{
+    "id"        : "pi",
+    "symbol"     : "π",
+    "name"      : "Pi"
+},
+{
+    "id"        : "rho",
+    "symbol"     : "ρ",
+    "name"      : "Rho"
+},
+{
+    "id"        : "sigma",
+    "symbol"     : "σ",
+    "name"      : "Sigma"
+},
+{
+    "id"        : "tau",
+    "symbol"     : "τ",
+    "name"      : "Tau"
+},
+{
+    "id"        : "upsilon",
+    "symbol"     : "υ",
+    "name"      : "Upsilon"
+},
+{
+    "id"        : "phi",
+    "symbol"     : "φ",
+    "name"      : "Phi"
+},
+{
+    "id"        : "chi",
+    "symbol"     : "χ",
+    "name"      : "Chi"
+},
+{
+    "id"        : "psi",
+    "symbol"     : "ψ",
+    "name"      : "Psi"
+},
+{
+    "id"        : "omega",
+    "symbol"     : "ω",
+    "name"      : "Omega"
+}]

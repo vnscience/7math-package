@@ -1,0 +1,207 @@
+:root {
+    --dark: #000e44;
+    --light: #ddd;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-width: 660px;
+}
+
+.my7MathContainer {
+    box-shadow: 0px 0px 15px #0009;
+    border-radius: 10px;
+    padding: 0px;
+}
+
+.readTextFromImage {
+    width: 100%;
+    height: 190px;
+}
+
+#editorArea {
+    width: 100%;
+}
+
+@media only screen and (max-width: 660px) {
+    body {
+        overflow-x: scroll;
+    }
+}
+
+.highight-menu {
+    background-color: #131e3c !important;
+    color: white !important;
+}
+
+#editorText, #editorHTML {
+    max-height: 380px;
+    overflow: scroll;
+    outline: none;
+    padding: 10px;
+    overflow: auto;
+    margin-top: 0px;
+    min-height: 300px;
+    font-size: 24px;
+    width: 100%;
+}
+
+[placeholder]:empty:before {
+    content: attr(placeholder);
+    color: #333;
+    opacity: 0.5;
+    cursor: text;
+}
+
+[placeholder]:empty:focus:before {
+    content: "";
+}
+
+.formatTab button {
+    height: 40px;
+    line-height: 10px;
+}
+
+.equationTab .tabItem {
+    background: #6c757d;
+    margin: 0px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.equationTab .tabItem.active {
+    border: 2px solid orangered;
+    color: white;
+    background: orangered;
+    transform: scale(1.1);
+    box-shadow: 0px 0px 10px #000;
+}
+
+.fractionToShow {
+    padding: 10px;
+    overflow: scroll;
+    height: 190px;
+    overflow-x: hidden;
+    background: #fff;
+    transition: all 0.5s ease;
+    text-align: center;
+}
+
+.fractionToShow .fraction-item {
+    display: inline-block;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background: #fff;
+    margin: 5px;
+    cursor: pointer;
+    width: 38px;
+    transition: all 0.2s ease;
+    outline: none;
+    padding: 3px;
+    font-size: 20px;
+}
+
+.fractionToShow .fraction-item:hover {
+    transform: scale(1.5);
+    box-shadow: 0px 0px 5px #333;
+    background: #fff;
+}
+
+.structureTab {
+    padding: 10px;
+    overflow: scroll;
+    height: 190px;
+    overflow-x: visible;
+    overflow-y: visible;
+    background: #fff;
+}
+
+.structureTab button {
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #131e3c;
+    border-radius: 5px;
+    margin: 5px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.structureTab button img {
+    height: 70px;
+}
+
+.structureTab button:hover {
+    transform: scale(1.3);
+    box-shadow: 0px 0px 10px #131e3c;
+}
+
+button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.row {
+    margin: 0px !important;
+}
+
+ul.dropdown-menu {
+    border: 1.5px solid #131e3c;
+    position: relative;
+}
+
+ul.dropdown-menu .dropdown-header {
+    color: #000;
+    border-bottom: 1px solid #131e3c33;
+    padding-bottom: 2px;
+}
+
+@keyframes fadeAnimate {
+    from {
+        opacity: 0;
+        transform: scale(1.1);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* ==== NEW STYLE === */
+
+.menuItem {
+    margin: 0;
+    vertical-align: middle;
+    padding: 2px;
+    transition: all 0.2s ease-in-out;
+    border: 0.5px solid #000;
+}
+
+.menuItem:hover {
+    transform: scale(1.05);
+}
+
+#uploader {
+    -webkit-appearance: none;
+    appearance: none;
+    max-width: 300px;
+    border-radius: 5px;
+    display: none;
+    transition: all 0.5s ease;
+}
+
+.changeEditorView li a.btn {
+    background: #5a6268 !important;
+    border-radius: 0;
+    color: #fff9;
+    border: 0;
+}
+
+.changeEditorView li a.btn.active {
+    background: orangered !important;
+    color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0px 0px 10px #000;
+}
