@@ -1,114 +1,1553 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>7 Math - Getting Started</title>
-    <link rel="shortcut icon" href="./assets/logo.png" type="image/x-icon">
-    <style>
-        .jumbotron > h3 {
-            margin: 0;
-            display: inline-block;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7Math — Trợ Lý Soạn Thảo Đề Thi & Giáo Án Toán Học</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'sans-serif'],
+          mono: ['JetBrains Mono', 'monospace'],
+        },
+        colors: {
+          brand: {
+            50: '#f5f3ff',
+            100: '#ede9fe',
+            500: '#6366f1',
+            600: '#4f46e5',
+            700: '#4338ca',
+          }
         }
-    </style>
+      }
+    }
+  }
+</script>
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    startup: {
+      typeset: false
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+<style>
+  /* Tối ưu hóa thanh cuộn */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  .dark ::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+  
+  /* Giữ tỷ lệ khung cho bảng preview */
+  .preview-container {
+    background-image: radial-gradient(rgba(99, 102, 241, 0.05) 1px, transparent 0);
+    background-size: 16px 16px;
+  }
+  .dark .preview-container {
+    background-image: radial-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 0);
+  }
+  
+  /* Giữ định dạng xuống dòng và khoảng trắng nguyên bản cho văn bản toán */
+  #previewArea {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    line-height: 1.45 !important; /* Thu gọn chiều cao dòng của công thức và văn bản */
+  }
+
+  /* Điều chỉnh khoảng cách giữa các đoạn văn (câu hỏi) nhỏ lại để cân đối bản in */
+  #previewArea p {
+    margin-top: 0.3em !important;
+    margin-bottom: 0.3em !important;
+  }
+  #previewArea div {
+    margin-top: 0.25em !important;
+    margin-bottom: 0.25em !important;
+  }
+  #previewArea pre {
+    margin-top: 0.4em !important;
+    margin-bottom: 0.4em !important;
+    padding: 0.4em !important;
+  }
+
+  /* Tạo phong cách cho các ô nhập liệu toán học trực quan */
+  .math-input-box {
+    text-align: center;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.375rem;
+    border: 2px dashed #cbd5e1;
+    background-color: #ffffff;
+    transition: all 0.15s ease-in-out;
+    outline: none;
+  }
+  .dark .math-input-box {
+    border-color: #4b5563;
+    background-color: #1f2937;
+    color: #f3f4f6;
+  }
+  .math-input-box:focus {
+    border-color: #6366f1;
+    border-style: solid;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  }
+
+  /* ============================================================
+     THIẾT LẬP MEDIA PRINT - TỐI ƯU HÓA KHỔ IN PDF CHUYÊN NGHIỆP
+     ============================================================ */
+  @media print {
+    body {
+      background: #ffffff !important;
+      color: #000000 !important;
+      min-height: auto !important;
+    }
+    
+    header, 
+    aside, 
+    section > div:first-child, /* Editor panel */
+    .p-3, /* Panels header */
+    .p-4, /* Toolbars / Footer */
+    #toast-container,
+    button,
+    select {
+      display: none !important;
+    }
+    
+    main, section {
+      display: block !important;
+      height: auto !important;
+      overflow: visible !important;
+    }
+
+    .preview-container {
+      background-image: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      height: auto !important;
+      overflow: visible !important;
+    }
+
+    #previewArea {
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      background: transparent !important;
+      color: #000000 !important;
+      font-family: "Times New Roman", Times, serif !important;
+      font-size: 12pt !important;
+      line-height: 1.4 !important;
+    }
+
+    /* Tiết kiệm tối đa giấy in khi xuất ra PDF thực tế */
+    #previewArea p {
+      margin-top: 3px !important;
+      margin-bottom: 3px !important;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      page-break-after: avoid;
+      break-after: avoid;
+      color: #000000 !important;
+    }
+
+    p, .math-block, pre, blockquote, .br-print-avoid {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    @page {
+      size: A4;
+      margin: 2cm 1.5cm 2cm 2cm;
+    }
+  }
+</style>
 </head>
-<body>
-    <div class="container-fluid">
-        <header class="jumbotron text-light bg-info p-3">
-            <h1 class="text-center font-weight-bold text-uppercase">Welcome to Equation Editor - 7MATH</h1>
-        </header>
-        <main>
-            <section class="editorShow jumbotron bg-light p-1">
-                <div id="editorContainer"></div>
-                <div class="btn btn-block btn-success" style="display: none;" onclick="handleSubmitData()">Preview Data</div>
-            </section>
-            <section class="whatIsThis jumbotron bg-white text-center">
-                <h3 class="text-uppercase text-info font-weight-bold">What Is This?</h3>
-                <hr style="width: 100px; border: 2px dashed #000;" />
-                <div class="row">
-                    <div class="col-md-4">
-                        <img src="./assets/what.jpg" alt="what" width="100%">
-                    </div>
-                    <div class="col-md-8" >
-                        <p class="text-justify" style="text-indent: 30px;">Just a step into the topic of Education, in the process of organizing exams, or composing scientific expressions on computer today, almost Editors that appeared before, were responding to many functions which are able to input text, number, with some special character that list on ASCII table. Problem is, when the Mathematical formulas have its complexity, requiring a tool can support the user typing data in a convenient way, instead of drawing in the third application, then import to the project as an image, or even not able to control to edit as well as display the similar type of data.</p>
-                        <p class="text-justify" style="text-indent: 30px;">Supporting input complex data as Maths and Sciences Equation is our tool main idea. Not only text, digits, special character, but also all complex equations can be support on our tool!</p>
-                    </div>
-                </div>
-            </section>
-            <section class="whyUseIt jumbotron text-center">
-                <h3 class="text-uppercase text-info font-weight-bold">Why Use It?</h3>
-                <hr style="width: 100px; border: 2px dashed #000;" />
-                <div class="row">
-                    <div class="col-md-8">
-                        <p class="text-justify" style="text-indent: 30px;">The project: “Processing Mathematical Formula on Web Form platform” is proceeded to serve the needs of inputting Mathematical formulas, or scientific expressions on computers, including some complex formulas as square root of 2, logarithmic, integration, etc.</p>
-                        <p class="text-justify" style="text-indent: 30px;">As using this tool, teachers, students, scientists can easily create tests, or documentations on their own, for their courses,...</p>
-                    </div>
-                    <div class="col-md-4">
-                        <img src="./assets/why.jpg" alt="what" width="100%">
-                    </div>
-                </div>
-            </section>
-            <section class="how2Use jumbotron bg-white text-center">
-                <h3 class="text-uppercase text-info font-weight-bold">How to Use?</h3>
-                <hr style="width: 100px; border: 2px dashed #000;" />
-                <div class="row">
-                    <div class="col-md-4 text-center">
-                        <img src="./assets/how.jpg" alt="what" width="70%">
-                    </div>
-                    <div class="col-md-8">
-                        <p class="text-justify" style="text-indent: 30px;">As a Web Form platform tool, users only need a smart device that has connection to the internet, then they can use it. This tool was responsive for many devices, with a friendly interface, saving time in drafting scientific expressions, increasing productivity and quality of study and research work.</p>
-                    </div>
-                    
-                </div>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col font-sans transition-colors duration-200">
 
-                <!-- <hr style="width: 100px;" />
-                <h4 class="text-center btn btn-block btn-disabled btn-success">Current Supported Browser</h4>
-                <div class="row">
-                    <div class="col-6 text-center">
-                        <div class="badge badge-info">Firefox</div>
-                        <img class="p-3" src="./assets/firefox_logo.png" alt="Firefox Logo" width="100px" />
-                    </div>
-                    <div class="col-6 text-center">
-                        <div class="badge badge-info">Safari</div>
-                        <img class="p-3" src="./assets/safari_logo.png" alt="Safari Logo" width="100px" />
-                    </div>
-                </div> -->
-            </section>
-            <section class="installNow jumbotron text-center">
-                <h3 class="text-uppercase text-info font-weight-bold">Installing guide step by step</h3>
-                <hr style="width: 100px; border: 2px dashed #000;" />
-                <div class="text-justity">
-                    <p class="bg-success p-1 rounded text-light">Step 01: Place Jquery, Poper JS, 7math JS right before end tag of body!</p>
-                    <script async src="//jsfiddle.net/baynv910/L8sdwe1x/embed/html/"></script>
-                    <p class="bg-success p-1 rounded text-light">Step 02: Place this code where you want this tool display in your web page!</p>
-                    <script async src="//jsfiddle.net/baynv910/61Lapdo4/1/embed/html/"></script>
-                    <p class="bg-success p-1 rounded text-light">Step 03: Get the result by assign a variable to <span class="text-warning">submitedData()</span>. For example, create a function name <span class="text-warning">handleSubmitData()</span>. Then put the results we got to an input box with <span class="text-warning">id="submitedData"</span></p>
-                    <script async src="//jsfiddle.net/baynv910/dr9aec7q/embed/html/"></script>
-            
-                </div>
-            </section>
-            <section class="text-center">
-                <h3 class="text-uppercase text-info font-weight-bold">DEMO ON PHP PROJECT</h3>
-                <hr style="width: 100px; border: 2px dashed #000;" />
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/JP8NEzRh54w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </section>
-        </main>
-        <footer class="jumbotron p-2 text-center m-0 mt-1 mb-1 bg-dark text-white">
-            Copyright &copy; 2021. All right reserved.
-        </footer>
+<div class="flex flex-col min-h-screen">
+  <!-- TOP BAR -->
+  <header class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700/80 px-4 py-3 sticky top-0 z-50 shadow-sm transition-colors">
+    <div class="max-w-[1600px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="bg-gradient-to-tr from-brand-600 to-indigo-500 text-white rounded-xl p-2 shadow-md shadow-brand-500/20">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+        </div>
+        <div>
+          <h1 class="text-lg font-bold tracking-tight flex items-center gap-2">
+            7Math <span class="text-xs bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 px-2 py-0.5 rounded-full font-semibold">Bản Dành Cho Giáo Viên</span>
+          </h1>
+          <p class="text-xs text-slate-400 dark:text-slate-400 hidden sm:block">Trợ lý ghép công thức trực quan kiểu MS Word - Xuất bản PDF đẹp mắt</p>
+        </div>
+      </div>
+      
+      <!-- Chế độ biên soạn -->
+      <div class="flex bg-slate-100 dark:bg-slate-900 p-1 rounded-xl border border-slate-200 dark:border-slate-800">
+        <button id="mode-doc-btn" onclick="setDocMode('document')" class="px-4 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 flex items-center gap-2 bg-white dark:bg-slate-800 shadow text-brand-600 dark:text-indigo-400">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+          Soạn Đề Thi / Bài Tập (Khuyên dùng)
+        </button>
+        <button id="mode-sandbox-btn" onclick="setDocMode('sandbox')" class="px-4 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+          Thử Nghiệm Công Thức Lẻ
+        </button>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button class="px-3 py-1.5 text-xs font-medium rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition" onclick="openModal('guide')">📖 Hướng dẫn nhanh</button>
+        <button class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-red-600 hover:bg-red-500 text-white shadow-md shadow-red-600/10 transition flex items-center gap-1.5" onclick="exportToPDF()">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+          Xuất PDF / In Đề
+        </button>
+        <button class="p-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition" onclick="toggleTheme()" id="theme-toggle" title="Đổi giao diện">🌙</button>
+      </div>
     </div>
+  </header>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" type="text/javascript"></script>
-    <script src="./7math.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        // Handle data submit from 7Math
-        handleSubmitData = () => {
-            let myData = submitedData();
-            alert(myData);
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-[1600px] w-full mx-auto flex flex-col lg:flex-row overflow-hidden">
+    
+    <!-- LEFT SIDEBAR: Trợ lý nhập liệu môn Toán -->
+    <aside class="w-full lg:w-[360px] xl:w-[400px] flex-shrink-0 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/80 flex flex-col h-[450px] lg:h-[calc(100vh-65px)] transition-colors">
+      <div class="border-b border-slate-200 dark:border-slate-700 flex bg-slate-50 dark:bg-slate-900/40 p-1">
+        <button onclick="switchSidebarTab('forms')" id="side-tab-forms" class="flex-1 py-2 text-xs font-semibold rounded-lg text-brand-600 dark:text-indigo-400 bg-white dark:bg-slate-800 shadow">📝 Ghép Word-Style</button>
+        <button onclick="switchSidebarTab('curriculum')" id="side-tab-curriculum" class="flex-1 py-2 text-xs font-semibold rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100">📚 Mẫu Có Sẵn</button>
+        <button onclick="switchSidebarTab('symbols')" id="side-tab-symbols" class="flex-1 py-2 text-xs font-semibold rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100">⭐ Ký tự nhanh</button>
+      </div>
+
+      <!-- Tab Content 0: BỘ GHÉP CÔNG THỨC TRỰC QUAN KIỂU MS WORD -->
+      <div id="side-panel-forms" class="flex-1 overflow-y-auto p-4 space-y-4">
+        <!-- Bộ chọn loại công thức Word-Style -->
+        <div class="space-y-1.5">
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Chọn mô hình toán học cần dựng:</label>
+          <div class="grid grid-cols-2 xl:grid-cols-3 gap-1.5">
+            <button onclick="selectWordTemplate('frac')" id="btn-w-frac" class="py-1 text-[11px] font-semibold rounded-lg border bg-brand-50 dark:bg-brand-950/40 border-brand-500 text-brand-600 dark:text-indigo-400 transition-all text-center">Phân Số</button>
+            <button onclick="selectWordTemplate('sqrt')" id="btn-w-sqrt" class="py-1 text-[11px] font-semibold rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all text-center">Căn Thức</button>
+            <button onclick="selectWordTemplate('pow')" id="btn-w-pow" class="py-1 text-[11px] font-semibold rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all text-center">Lũy Thừa</button>
+            <button onclick="selectWordTemplate('log')" id="btn-w-log" class="py-1 text-[11px] font-semibold rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all text-center">Lôgarit</button>
+            <button onclick="selectWordTemplate('lim')" id="btn-w-lim" class="py-1 text-[11px] font-semibold rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all text-center">Giới Hạn</button>
+            <button onclick="selectWordTemplate('sigma')" id="btn-w-sigma" class="py-1 text-[11px] font-semibold rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all text-center">Tổng ∑</button>
+            <button onclick="selectWordTemplate('integral')" id="btn-w-integral" class="py-1 text-[11px] font-semibold rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all text-center">Tích Phân</button>
+            <button onclick="selectWordTemplate('vector')" id="btn-w-vector" class="py-1 text-[11px] font-semibold rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all text-center">Vectơ</button>
+            <button onclick="selectWordTemplate('system')" id="btn-w-system" class="py-1 text-[11px] font-semibold rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all text-center">Hệ PT</button>
+            <button onclick="selectWordTemplate('matrix')" id="btn-w-matrix" class="py-1 text-[11px] font-semibold rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all text-center col-span-2 xl:col-span-1">Ma Trận</button>
+          </div>
+        </div>
+
+        <!-- Khung Dựng Không Gian Trực Quan (Live Interactive Spatial Container) -->
+        <div class="bg-indigo-50/50 dark:bg-indigo-950/20 p-4 rounded-xl border border-indigo-100 dark:border-indigo-900/60 flex flex-col items-center justify-center min-h-[160px] relative">
+          
+          <!-- 1. Mô hình Phân số -->
+          <div id="w-holder-frac" class="w-full flex flex-col items-center gap-1">
+            <input id="w-frac-num" type="text" placeholder="Tử số" class="math-input-box w-3/4" />
+            <div class="h-0.5 bg-slate-400 dark:bg-slate-500 w-3/4 my-1"></div>
+            <input id="w-frac-den" type="text" placeholder="Mẫu số" class="math-input-box w-3/4" />
+          </div>
+
+          <!-- 2. Mô hình Căn thức -->
+          <div id="w-holder-sqrt" class="w-full flex items-center justify-center gap-1 hidden">
+            <span class="text-3xl font-extralight text-slate-500 select-none">√</span>
+            <div class="border-t-2 border-slate-400 dark:border-slate-500 pt-2 pl-1 flex-1 max-w-[80%]">
+              <input id="w-sqrt-val" type="text" placeholder="Biểu thức trong căn" class="math-input-box w-full" />
+            </div>
+          </div>
+
+          <!-- 3. Mô hình Lũy thừa -->
+          <div id="w-holder-pow" class="w-full flex items-end justify-center gap-1 py-4 hidden">
+            <input id="w-pow-base" type="text" placeholder="Cơ số" class="math-input-box w-1/2" />
+            <div class="-translate-y-4">
+              <input id="w-pow-exp" type="text" placeholder="Mũ" class="math-input-box w-16 text-xs" />
+            </div>
+          </div>
+
+          <!-- 4. Mô hình Lôgarit (Mới) -->
+          <div id="w-holder-log" class="w-full flex items-end justify-center gap-1 py-4 hidden">
+            <span class="text-2xl font-light text-slate-500 select-none">log</span>
+            <div class="translate-y-1">
+              <input id="w-log-base" type="text" placeholder="Cơ số" class="math-input-box w-16 text-xs" />
+            </div>
+            <span class="text-2xl font-light text-slate-500 select-none">(</span>
+            <input id="w-log-expr" type="text" placeholder="Biểu thức" class="math-input-box w-1/2" />
+            <span class="text-2xl font-light text-slate-500 select-none">)</span>
+          </div>
+
+          <!-- 5. Mô hình Giới Hạn (Mới) -->
+          <div id="w-holder-lim" class="w-full flex items-center justify-center gap-2 hidden">
+            <div class="flex flex-col items-center gap-0.5">
+              <span class="text-2xl font-light text-slate-500 select-none">lim</span>
+              <input id="w-lim-sub" type="text" placeholder="x → 0" class="math-input-box w-24 text-[10px]" />
+            </div>
+            <input id="w-lim-expr" type="text" placeholder="Biểu thức" class="math-input-box flex-1 max-w-[60%]" />
+          </div>
+
+          <!-- 6. Mô hình Tổng Sigma -->
+          <div id="w-holder-sigma" class="w-full flex items-center justify-center gap-3 hidden">
+            <div class="flex flex-col items-center gap-1">
+              <input id="w-sigma-top" type="text" placeholder="Trên" class="math-input-box w-16 text-xs" />
+              <span class="text-4xl font-light text-slate-600 dark:text-slate-400 select-none">∑</span>
+              <input id="w-sigma-bottom" type="text" placeholder="Dưới" class="math-input-box w-20 text-xs" />
+            </div>
+            <div class="flex-1 max-w-[50%]">
+              <input id="w-sigma-expr" type="text" placeholder="Biểu thức" class="math-input-box w-full" />
+            </div>
+          </div>
+
+          <!-- 7. Tích Phân -->
+          <div id="w-holder-integral" class="w-full flex items-center justify-center gap-2 hidden">
+            <span class="text-5xl font-extralight text-slate-600 dark:text-slate-400 select-none">∫</span>
+            <div class="flex flex-col justify-between h-28 -translate-x-3">
+              <input id="w-integral-top" type="text" placeholder="Cận trên" class="math-input-box w-16 text-xs" />
+              <input id="w-integral-bottom" type="text" placeholder="Cận dưới" class="math-input-box w-16 text-xs" />
+            </div>
+            <div class="flex-1 max-w-[55%]">
+              <input id="w-integral-expr" type="text" placeholder="Hàm số dưới dấu tích phân" class="math-input-box w-full" />
+            </div>
+          </div>
+
+          <!-- 8. Vectơ (Mới) -->
+          <div id="w-holder-vector" class="w-full flex flex-col items-center justify-center gap-1.5 hidden">
+            <span class="text-xl text-slate-500 select-none">➔</span>
+            <input id="w-vector-val" type="text" placeholder="Tên vectơ (vd: AB, u)" class="math-input-box w-2/3" />
+          </div>
+
+          <!-- 9. Hệ Phương Trình -->
+          <div id="w-holder-system" class="w-full flex items-center justify-center gap-2 hidden">
+            <span class="text-5xl font-extralight text-slate-500 select-none">{</span>
+            <div class="flex flex-col gap-2 flex-1">
+              <input id="w-system-eq1" type="text" placeholder="Phương trình 1" class="math-input-box w-full" />
+              <input id="w-system-eq2" type="text" placeholder="Phương trình 2" class="math-input-box w-full" />
+            </div>
+          </div>
+
+          <!-- 10. Ma Trận (Mới) -->
+          <div id="w-holder-matrix" class="w-full flex items-center justify-center gap-2 hidden">
+            <span class="text-4xl font-extralight text-slate-500 select-none">[</span>
+            <div class="grid grid-cols-2 gap-1.5 p-2 bg-slate-100/50 dark:bg-slate-850/50 rounded-lg">
+              <input id="w-matrix-11" type="text" placeholder="a" class="math-input-box w-12 text-xs" />
+              <input id="w-matrix-12" type="text" placeholder="b" class="math-input-box w-12 text-xs" />
+              <input id="w-matrix-21" type="text" placeholder="c" class="math-input-box w-12 text-xs" />
+              <input id="w-matrix-22" type="text" placeholder="d" class="math-input-box w-12 text-xs" />
+            </div>
+            <span class="text-4xl font-extralight text-slate-500 select-none">]</span>
+          </div>
+
+        </div>
+
+        <!-- Nút hành động cho Mô hình Trực Quan -->
+        <button onclick="insertWordStyleFormula()" class="w-full py-3 bg-brand-600 hover:bg-brand-500 active:scale-95 text-white font-bold rounded-xl text-xs transition-all shadow-md shadow-brand-500/20 flex items-center justify-center gap-2">
+          <span>🎯</span> CHÈN CÔNG THỨC VÀO TRANG IN
+        </button>
+
+        <hr class="border-slate-100 dark:border-slate-800" />
+
+        <!-- Trình tạo câu hỏi trắc nghiệm tự động -->
+        <div class="bg-indigo-50/50 dark:bg-indigo-950/20 p-3.5 rounded-xl border border-indigo-100 dark:border-indigo-900/60 space-y-3">
+          <div class="flex items-center gap-1.5">
+            <span class="text-sm">❓</span>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-300">Tạo Câu Hỏi Trắc Nghiệm</h4>
+          </div>
+          <div class="space-y-2">
+            <div>
+              <label class="text-[10px] font-semibold text-slate-400 uppercase">Số câu / Tiêu đề</label>
+              <input id="form-q-num" type="text" value="Câu 1" class="w-full mt-0.5 p-1.5 text-xs rounded border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-brand-500" placeholder="Ví dụ: Câu 1, Câu hỏi..."/>
+            </div>
+            <div>
+              <label class="text-[10px] font-semibold text-slate-400 uppercase">Nội dung câu hỏi</label>
+              <textarea id="form-q-text" rows="2" class="w-full mt-0.5 p-1.5 text-xs rounded border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-brand-500" placeholder="Ví dụ: Tìm tập nghiệm của phương trình x^2 - 4 = 0..."></textarea>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="text-[10px] font-bold text-blue-500">Đáp án A</label>
+                <input id="form-q-a" type="text" class="w-full mt-0.5 p-1.5 text-xs rounded border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 focus:outline-none focus:ring-1 focus:ring-brand-500" placeholder="S = {-2; 2}"/>
+              </div>
+              <div>
+                <label class="text-[10px] font-bold text-blue-500">Đáp án B</label>
+                <input id="form-q-b" type="text" class="w-full mt-0.5 p-1.5 text-xs rounded border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 focus:outline-none focus:ring-1 focus:ring-brand-500" placeholder="S = {2}"/>
+              </div>
+              <div>
+                <label class="text-[10px] font-bold text-blue-500">Đáp án C</label>
+                <input id="form-q-c" type="text" class="w-full mt-0.5 p-1.5 text-xs rounded border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 focus:outline-none focus:ring-1 focus:ring-brand-500" placeholder="S = {-2}"/>
+              </div>
+              <div>
+                <label class="text-[10px] font-bold text-blue-500">Đáp án D</label>
+                <input id="form-q-d" type="text" class="w-full mt-0.5 p-1.5 text-xs rounded border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 focus:outline-none focus:ring-1 focus:ring-brand-500" placeholder="S = R"/>
+              </div>
+            </div>
+            <button onclick="insertFormQuestion()" class="w-full py-2 bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-semibold rounded-lg text-xs transition shadow shadow-indigo-600/20">➕ Chèn Câu Hỏi Vào Đề</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content 1: Theo Phân Môn & Cấp Học (Mẫu Có Sẵn) -->
+      <div id="side-panel-curriculum" class="flex-1 overflow-y-auto p-4 space-y-4 hidden">
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Đại Số & Giải Tích</h3>
+          <div class="grid grid-cols-2 gap-2" id="algebra-templates"></div>
+        </div>
+        <hr class="border-slate-100 dark:border-slate-700" />
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Hình Học & Không Gian</h3>
+          <div class="grid grid-cols-2 gap-2" id="geometry-templates"></div>
+        </div>
+        <hr class="border-slate-100 dark:border-slate-700" />
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Xác Suất & Thống Kê</h3>
+          <div class="grid grid-cols-2 gap-2" id="stat-templates"></div>
+        </div>
+        <hr class="border-slate-100 dark:border-slate-700" />
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-500 mb-2">Khung Câu Hỏi Đề Thi</h4>
+          <div class="space-y-2.5" id="exam-structural-templates"></div>
+        </div>
+        <hr class="border-slate-100 dark:border-slate-700" />
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Mẫu Trình Bày Toán Học</h4>
+          <div class="space-y-2.5" id="math-layout-templates"></div>
+        </div>
+      </div>
+
+      <!-- Tab Content 3: Danh Mục Ký Tự Nhanh -->
+      <div id="side-panel-symbols" class="flex-1 overflow-y-auto p-4 space-y-4 hidden">
+        <div class="space-y-3">
+          <div>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Bảng Chữ Cái Hy Lạp</span>
+            <div class="grid grid-cols-6 gap-1.5 mt-1.5" id="greek-grid"></div>
+          </div>
+          <div>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Phép Toán & Quan Hệ</span>
+            <div class="grid grid-cols-6 gap-1.5 mt-1.5" id="operator-grid"></div>
+          </div>
+          <div>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Tập Hợp & Logic</span>
+            <div class="grid grid-cols-6 gap-1.5 mt-1.5" id="logic-grid"></div>
+          </div>
+          <div>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Mũ, Căn & Phân Số</span>
+            <div class="grid grid-cols-6 gap-1.5 mt-1.5" id="fraction-grid"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phục vụ giáo án nháp nhanh -->
+      <div class="p-3 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-semibold text-slate-500">Giáo án đã lưu nháp</span>
+          <button onclick="clearSavedDrafts()" class="text-[11px] text-red-500 hover:underline">Xóa hết</button>
+        </div>
+        <div class="max-h-[100px] overflow-y-auto space-y-1.5" id="saved-drafts-list">
+          <p class="text-xs text-slate-400 italic text-center py-2">Chưa có nháp lưu trữ nào</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- RIGHT WORKSPACE: Trình soạn thảo & Preview nâng cao -->
+    <section class="flex-1 flex flex-col md:flex-row overflow-hidden h-[calc(100vh-65px)]">
+      
+      <!-- Khung Nhập Liệu (Editor) -->
+      <div class="flex-1 flex flex-col border-r border-slate-200 dark:border-slate-800 min-w-0">
+        <!-- Editor Header & Toolbar -->
+        <div class="p-3 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700/80 flex flex-wrap items-center justify-between gap-2">
+          <div class="flex items-center gap-1">
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Vùng Viết Đề Bài & Giáo Án (Gõ chữ tự nhiên)</span>
+            <span id="editor-hint" class="text-[10px] bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-300 px-2 py-0.5 rounded-md font-medium">Bản nháp tự động lưu</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <!-- Nhóm Hoàn tác (Undo/Redo) -->
+            <button id="btn-undo" onclick="triggerUndo()" class="p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100" title="Hoàn tác (Ctrl+Z)">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+              </svg>
+            </button>
+            <button id="btn-redo" onclick="triggerRedo()" class="p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100" title="Làm lại (Ctrl+Y)">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l6-6m0 0l-6-6m6 6H9a6 6 0 000 12h3" />
+              </svg>
+            </button>
+
+            <div class="w-px h-4 bg-slate-200 dark:bg-slate-700 mx-1"></div>
+
+            <!-- Định dạng Font -->
+            <button onclick="insertCustomCode('bold')" class="p-1 text-xs font-bold rounded hover:bg-slate-100 dark:hover:bg-slate-700 w-8 h-8 flex items-center justify-center text-slate-700 dark:text-slate-300" title="Chữ Đậm (LaTeX)"><b>B</b></button>
+            <button onclick="insertCustomCode('italic')" class="p-1 text-xs font-semibold italic rounded hover:bg-slate-100 dark:hover:bg-slate-700 w-8 h-8 flex items-center justify-center text-slate-700 dark:text-slate-300" title="Chữ Nghiêng (LaTeX)"><i>I</i></button>
+            <button onclick="insertCustomCode('underline')" class="p-1 text-xs font-semibold underline rounded hover:bg-slate-100 dark:hover:bg-slate-700 w-8 h-8 flex items-center justify-center text-slate-700 dark:text-slate-300" title="Gạch Chân (LaTeX)"><u>U</u></button>
+            
+            <div class="w-px h-4 bg-slate-200 dark:bg-slate-700 mx-1"></div>
+            
+            <!-- Căn lề văn bản -->
+            <button onclick="insertCustomCode('align-left')" class="p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100" title="Căn lề trái">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h10M4 18h16" /></svg>
+            </button>
+            <button onclick="insertCustomCode('align-center')" class="p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100" title="Căn giữa">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M8 12h8M4 18h16" /></svg>
+            </button>
+            <button onclick="insertCustomCode('align-right')" class="p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100" title="Căn lề phải">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M10 12h10M4 18h16" /></svg>
+            </button>
+            <button onclick="insertCustomCode('align-justify')" class="p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100" title="Căn lề đều hai bên">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+            </button>
+            
+            <div class="w-px h-4 bg-slate-200 dark:bg-slate-700 mx-1"></div>
+            
+            <!-- Phím bao công thức toán -->
+            <button onclick="wrapSelectionWith('$', '$')" class="px-2 py-1 text-[11px] font-semibold rounded bg-indigo-50 dark:bg-indigo-950/40 text-brand-600 dark:text-indigo-400 border border-indigo-100/80 dark:border-indigo-900" title="Đặt trong cặp $ để viết công thức nội dòng">$ Công thức</button>
+            <button onclick="wrapSelectionWith('$$\\n', '\\n$$')" class="px-2 py-1 text-[11px] font-semibold rounded bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900" title="Đặt trong cặp $$ để viết công thức khối dòng">$$ Khối dòng</button>
+          </div>
+        </div>
+
+        <div class="flex-1 p-4 bg-white dark:bg-slate-900 flex flex-col gap-3 relative">
+          <!-- Textarea -->
+          <textarea id="latexInput" 
+            class="flex-1 w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-100 font-mono text-sm leading-relaxed focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white dark:focus:bg-slate-800/90 resize-none transition-all"
+            placeholder="Mời thầy/cô soạn giáo án hoặc đề bài tại đây...
+Ví dụ công thức nội dòng: Cho tam giác vuông có cạnh huyền $a = \sqrt{b^2 + c^2}$.
+Hoặc dùng các nút ở thanh công cụ và cột bên trái để chèn nhanh mã đề thi, hệ phương trình, đồ thị..."
+            oninput="handleInput()"
+            onkeydown="handleSpecialKeys(event)"></textarea>
+
+          <!-- Status Bar -->
+          <div class="flex items-center justify-between text-xs text-slate-400 mt-1">
+            <div class="flex items-center gap-4">
+              <span id="char-count">0 ký tự</span>
+              <span id="render-status" class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Đã đồng bộ</span>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="saveCurrentToDraft()" class="text-brand-600 dark:text-indigo-400 hover:underline">💾 Lưu nháp mới</button>
+              <button onclick="clearEditor()" class="text-red-500 hover:underline">✕ Xoá hết</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Khung Hiển Thị Kết Quả (Preview & PDF settings) -->
+      <div class="flex-1 flex flex-col min-w-0 bg-slate-100 dark:bg-slate-900">
+        <!-- Preview Header & Zoom control -->
+        <div class="p-3 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700/80 flex items-center justify-between gap-2">
+          <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Trực Quan Bản In Giáo Án / Đề Thi</span>
+          <div class="flex items-center gap-2">
+            <span class="text-xs text-slate-400">Cỡ chữ xem thử:</span>
+            <select id="preview-font-size" onchange="updatePreviewSize()" class="text-xs px-2 py-1 rounded border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300 focus:outline-none">
+              <option value="text-sm">Nhỏ (14px)</option>
+              <option value="text-base" selected>Vừa (16px)</option>
+              <option value="text-lg">Lớn (18px)</option>
+              <option value="text-xl">Rất lớn (20px)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Render Box -->
+        <div class="flex-1 p-6 overflow-y-auto preview-container flex flex-col">
+          <div id="previewArea" class="bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm text-slate-800 dark:text-slate-100 min-h-full leading-relaxed prose dark:prose-invert max-w-none break-words">
+            <p class="text-slate-400 dark:text-slate-500 italic text-center mt-12">Nội dung đề bài hoặc công thức sau khi biên dịch sẽ hiển thị trực quan ở đây.</p>
+          </div>
+        </div>
+
+        <!-- Copy / Export Actions Panel -->
+        <div class="p-4 bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 flex flex-col gap-2.5">
+          <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Hộp Công Cụ Xuất Bản Cho Thầy Cô</div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <button onclick="exportToPDF()" class="px-3 py-2 text-xs font-semibold rounded-lg bg-indigo-50 hover:bg-indigo-100 dark:bg-brand-500/10 dark:hover:bg-brand-500/20 text-brand-600 dark:text-indigo-400 border border-indigo-100/80 dark:border-brand-500/20 flex items-center justify-center gap-1.5 transition">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+              Xuất PDF / In nhanh
+            </button>
+            <button onclick="copyPlainLaTeX()" class="px-3 py-2 text-xs font-semibold rounded-lg bg-slate-50 hover:bg-slate-100 dark:bg-slate-700/50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600 flex items-center justify-center gap-1.5 transition">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+              Sao chép mã LaTeX
+            </button>
+            <button onclick="copyLmsCode()" class="px-3 py-2 text-xs font-semibold rounded-lg bg-violet-50 hover:bg-violet-100 dark:bg-violet-950/30 dark:hover:bg-violet-950/50 text-violet-600 dark:text-violet-400 border border-violet-100 dark:border-violet-900 col-span-2 sm:col-span-1 flex items-center justify-center gap-1.5 transition" title="Dành cho Moodle, LMS, Azota">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
+              Copy mã Nhúng LMS
+            </button>
+          </div>
+          <p class="text-[10px] text-slate-400 italic">Mẹo in: Khi hộp thoại in mở ra, hãy chọn điểm đến là <b>"Lưu dưới dạng PDF"</b> (Save as PDF). Hãy chắc chắn bỏ chọn "Tiêu đề và chân trang" (Headers and Footers) để trang tài liệu PDF của thầy cô được sạch đẹp và chuyên nghiệp nhất!</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- GUIDE MODAL (HƯỚNG DẪN) -->
+<div id="modal-guide" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
+  <div class="bg-white dark:bg-slate-800 rounded-2xl max-w-xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-slate-200 dark:border-slate-700/60 overflow-hidden transform scale-95 transition-transform duration-200">
+    <div class="p-5 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
+      <h3 class="font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2">
+        <span>📖 Hướng Dẫn Soạn Thảo Cho Giáo Viên</span>
+      </h3>
+      <button onclick="closeModal('guide')" class="p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400">✕</button>
+    </div>
+    <div class="p-6 overflow-y-auto space-y-4 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+      <div>
+        <h4 class="font-bold text-slate-800 dark:text-slate-100 mb-1">1. Viết công thức toán học</h4>
+        <p>Để viết công thức toán học nội dòng, thầy cô đặt công thức giữa cặp ký tự <code class="px-1.5 py-0.5 bg-slate-100 dark:bg-slate-700 text-indigo-500 rounded font-mono text-xs">$</code>. Ví dụ: <code class="px-1.5 py-0.5 bg-slate-100 dark:bg-slate-700 text-indigo-500 rounded font-mono text-xs">Cho $x = \frac{a}{b}$ tính...</code></p>
+      </div>
+      <div>
+        <h4 class="font-bold text-slate-800 dark:text-slate-100 mb-1">2. Sử dụng trợ lý điền Form không cần code</h4>
+        <p>Tại Tab <b>"Ghép Word-Style"</b> ở cột trái, thầy cô chỉ cần chọn loại công thức, nhập thông tin vào mô hình trực quan ở dưới và bấm <b>"CHÈN CÔNG THỨC"</b>. Hệ thống tự gõ mã toán học hoàn hảo cho thầy cô.</p>
+      </div>
+      <div>
+        <h4 class="font-bold text-slate-800 dark:text-slate-100 mb-1">3. Căn chỉnh & Định dạng văn bản</h4>
+        <p>Sử dụng các phím định dạng phông chữ ở trên đỉnh trình soạn thảo: <b>B (Đậm)</b>, <i>I (Nghiêng)</i>, <u>U (Gạch chân)</u> hoặc các nút căn chỉnh lề văn bản Trái, Giữa, Phải, Căn đều để tối ưu hóa bản in.</p>
+      </div>
+      <div>
+        <h4 class="font-bold text-slate-800 dark:text-slate-100 mb-1">4. Xuất file PDF tiêu chuẩn tuyệt đối</h4>
+        <p>Không lo bị lỗi font chữ hay đè ký tự toán học như khi làm việc trên MS Word. Khi xuất PDF, hệ thống sẽ sử dụng công nghệ in vector chất lượng cực cao của trình duyệt để tạo ra tệp PDF đẹp mắt, chuyên nghiệp.</p>
+      </div>
+      <div class="p-4 bg-indigo-50 dark:bg-indigo-950/40 rounded-xl border border-indigo-100 dark:border-indigo-900 text-xs text-indigo-600 dark:text-indigo-400">
+        <span class="font-bold">💡 Phím tắt nhanh:</span>
+        <ul class="list-disc ml-4 mt-1 space-y-1">
+          <li>Dán nhanh ký tự: Sử dụng bảng ký tự bên trái thay vì gõ code dài dòng.</li>
+          <li>Thụt lề: Nhấn <code class="font-mono bg-white dark:bg-slate-800 px-1 py-0.5 rounded shadow-sm">Tab</code> để chèn 2 khoảng trắng thụt lề nhanh.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="p-4 border-t border-slate-100 dark:border-slate-700/80 bg-slate-50 dark:bg-slate-900/50 flex justify-end">
+      <button onclick="closeModal('guide')" class="px-4 py-2 text-xs font-semibold rounded-lg bg-brand-600 hover:bg-brand-500 text-white shadow-md shadow-brand-500/15">Tôi đã hiểu</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div id="toast-container" class="fixed bottom-6 right-6 z-[9999] flex flex-col gap-2"></div>
+
+<script>
+// ============================================================
+// DỮ LIỆU ĐỊNH DẠNG MẪU CHUYÊN BIỆT CHO GIÁO VIÊN
+// ============================================================
+const ALGEBRA_TEMPLATES = [
+  { name: "Hàm số bậc hai", latex: "y = ax^2 + bx + c \\quad (a \\neq 0)" },
+  { name: "Hệ phương trình", latex: "\\begin{cases} ax + by = c \\\\ a'x + b'y = c' \\end{cases}" },
+  { name: "Phương trình lượng giác", latex: "\\sin(x) = \\sin(\\alpha) \\Leftrightarrow \\left[ \\begin{array}{l} x = \\alpha + k2\\pi \\\\ x = \\pi - \\alpha + k2\\pi \\end{array} \\right. \\quad (k \\in \\mathbb{Z})" },
+  { name: "Phương trình mũ", latex: "a^{f(x)} = b \\Leftrightarrow f(x) = \\log_a(b) \\quad (0 < a \\neq 1, b > 0)" },
+  { name: "Cấp số cộng / nhân", latex: "u_n = u_1 + (n-1)d \\quad | \\quad u_n = u_1 \\cdot q^{n-1}" },
+  { name: "Tam thức bậc hai", latex: "f(x) = ax^2 + bx + c \\quad (a > 0, \\Delta < 0 \\Rightarrow f(x) > 0, \\forall x)" }
+];
+
+const GEOMETRY_TEMPLATES = [
+  { name: "Phương trình đường thẳng", latex: "\\Delta: ax + by + c = 0" },
+  { name: "Phương trình mặt cầu", latex: "(S): (x-a)^2 + (y-b)^2 + (z-c)^2 = R^2" },
+  { name: "Phương trình mặt phẳng", latex: "(\\alpha): Ax + By + Cz + D = 0" },
+  { name: "Tích có hướng", latex: "\\vec{u} \\times \\vec{v} = \\left( y_1z_2 - z_1y_2; \\, z_1x_2 - x_1z_2; \\, x_1y_2 - y_1x_2 \\right)" },
+  { name: "Công thức diện tích tam giác", latex: "S = \\frac{1}{2}ab\\sin C = pr = \\frac{abc}{4R}" },
+  { name: "Khoảng cách từ điểm tới mp", latex: "d(M_0, \\alpha) = \\frac{|Ax_0 + By_0 + Cz_0 + D|}{\\sqrt{A^2 + B^2 + C^2}}" }
+];
+
+const STAT_TEMPLATES = [
+  { name: "Kỳ vọng (Trung bình)", latex: "\\mu = E(X) = \\sum_{i=1}^n x_i p_i" },
+  { name: "Công thức nhị thức Bernoulli", latex: "P_n(k) = C_n^k p^k (1-p)^{n-k}" },
+  { name: "Phương sai lý thuyết", latex: "D(X) = E(X^2) - [E(X)]^2" },
+  { name: "Tổ hợp / Chỉnh hợp", latex: "C_n^k = \\frac{n!}{k!(n-k)!} \\quad | \\quad A_n^k = \\frac{n!}{(n-k)!}" }
+];
+
+const EXAM_STRUCTURAL_TEMPLATES = [
+  { 
+    name: "Câu hỏi trắc nghiệm (Cơ bản)", 
+    latex: "Câu 1. Tìm tập nghiệm của phương trình $x^2 - 4 = 0$.\n\nA. $S = \\{-2; 2\\}$.\nB. $S = \\{2\\}$.\nC. $S = \\{-2\\}$.\nD. $S = \\varnothing$." 
+  },
+  { 
+    name: "Câu hỏi trắc nghiệm (Xếp 2 hàng)", 
+    latex: "Câu 2. Cho hàm số $y = f(x)$ có đạo hàm $f'(x) = x(x-1)^2$. Số điểm cực trị của hàm số là:\n\nA. $1$.\t\tB. $2$.\nC. $0$.\t\tD. $3$." 
+  },
+  { 
+    name: "Đề toán Tự luận hoàn chỉnh", 
+    latex: "Bài 1 (2,0 điểm). Cho biểu thức $A = \\frac{\\sqrt{x}+1}{\\sqrt{x}-1}$ với $x \\ge 0, x \\neq 1$.\n\na) Tính giá trị của biểu thức $A$ tại $x = 9$.\nb) Rút gọn biểu thức $B = A - \\frac{2}{\\sqrt{x}+1}$." 
+  }
+];
+
+const MATH_LAYOUT_TEMPLATES = [
+  {
+    name: "Bảng biến thiên / Hàm phân nhánh",
+    latex: "f(x) = \\begin{cases} \\frac{x^2 - 1}{x - 1} & \\text{nếu } x \\neq 1 \\\\ 2 & \\text{nếu } x = 1 \\end{cases}"
+  },
+  {
+    name: "Giải hệ phương trình từng bước",
+    latex: "\\begin{aligned}\n\\begin{cases} x + y = 3 \\\\ 2x - y = 0 \\end{cases} &\\Leftrightarrow \\begin{cases} 3x = 3 \\\\ y = 2x \\end{cases} \\\\\n&\\Leftrightarrow \\begin{cases} x = 1 \\\\ y = 2 \\end{cases}\n\\end{aligned}"
+  },
+  {
+    name: "Giới hạn (Limit) trình bày đẹp",
+    latex: "L = \\lim_{x \\to 1} \\frac{x^2 - 3x + 2}{x - 1} = \\lim_{x \\to 1} \\frac{(x-1)(x-2)}{x-1} = \\lim_{x \\to 1} (x - 2) = -1."
+  }
+];
+
+const GREEK_SYMBOLS = [
+  { sym: "α", latex: "\\alpha" }, { sym: "β", latex: "\\beta" }, { sym: "γ", latex: "\\gamma" },
+  { sym: "δ", latex: "\\delta" }, { sym: "ε", latex: "\\epsilon" }, { sym: "η", latex: "\\eta" },
+  { sym: "θ", latex: "\\theta" }, { sym: "λ", latex: "\\lambda" }, { sym: "μ", latex: "\\mu" },
+  { sym: "π", latex: "\\pi" }, { sym: "σ", latex: "\\sigma" }, { sym: "ω", latex: "\\omega" },
+  { sym: "Δ", latex: "\\Delta" }, { sym: "Ω", latex: "\\Omega" }, { sym: "Φ", latex: "\\Phi" },
+  { sym: "π", latex: "\\pi" }, { sym: "ρ", latex: "\\rho" }, { sym: "τ", latex: "\\tau" }
+];
+
+const OPERATOR_SYMBOLS = [
+  { sym: "±", latex: "\\pm" }, { sym: "≈", latex: "\\approx" }, { sym: "≠", latex: "\\neq" },
+  { sym: "≡", latex: "\\equiv" }, { sym: "≤", latex: "\\leq" }, { sym: "≥", latex: "\\geq" },
+  { sym: "×", latex: "\\times" }, { sym: "÷", latex: "\\div" }, { sym: "⋅", latex: "\\cdot" },
+  { sym: "∞", latex: "\\infty" }, { sym: "→", latex: "\\to" }, { sym: "⇒", latex: "\\Rightarrow" },
+  { sym: "⇔", latex: "\\Leftrightarrow" }, { sym: "∇", latex: "\\nabla" }, { sym: "∂", latex: "\\partial" },
+  { sym: "∫", latex: "\\int" }, { sym: "∬", latex: "\\iint" }, { sym: "∑", latex: "\\sum" }
+];
+
+const LOGIC_SYMBOLS = [
+  { sym: "∈", latex: "\\in" }, { sym: "∉", latex: "\\notin" }, { sym: "⊂", latex: "\\subset" },
+  { sym: "⊃", legacy: "\\supset", latex: "\\supset" }, { sym: "⊆", latex: "\\subseteq" }, { sym: "∪", latex: "\\cup" },
+  { sym: "∩", latex: "\\cap" }, { sym: "∅", legacy: "\\emptyset", latex: "\\varnothing" }, { sym: "∀", latex: "\\forall" },
+  { sym: "∃", latex: "\\exists" }, { sym: "∧", latex: "\\land" }, { sym: "∨", latex: "\\lor" }
+];
+
+const FRACTION_SYMBOLS = [
+  { sym: "a/b", latex: "\\frac{a}{b}" }, { sym: "√x", latex: "\\sqrt{x}" }, { sym: "ⁿ√x", latex: "\\sqrt[n]{x}" },
+  { sym: "x²", latex: "x^{2}" }, { sym: "xⁿ", latex: "x^{n}" }, { sym: "xᵢ", latex: "x_{i}" },
+  { sym: "|x|", latex: "|x|" }, { sym: "( )", latex: "\\left( x \\right)" }, { sym: "[ ]", latex: "\\left[ x \\right]" },
+  { sym: "{ }", latex: "\\left\\{ x \\right\\}" }, { sym: "→a", latex: "_{x \\to a}" }, { sym: "∫aᵇ", latex: "\\int_{a}^{b}" }
+];
+
+// ============================================================
+// QUẢN LÝ TRẠNG THÁI (STATE MANAGEMENT)
+// ============================================================
+let activeSidebarTab = 'forms'; 
+let currentDocMode = 'document'; 
+let currentWordTemplate = 'frac'; // Phân số là mặc định ban đầu
+let renderTimeout = null;
+let savedDrafts = JSON.parse(localStorage.getItem('7math_teacher_drafts') || '[]');
+
+// Hệ thống Undo & Redo Lịch sử cho Trình soạn thảo
+let undoStack = [];
+let redoStack = [];
+let isUndoingOrRedoing = false;
+let typingTimer = null;
+
+const SANDBOX_INIT_VALUE = "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}";
+const DOCUMENT_INIT_VALUE = `TRƯỜNG THPT CHUYÊN 7MATH
+ĐỀ THI THỬ THPT QUỐC GIA
+
+Bài 1. Giải phương trình lượng giác sau:
+$$\sin^2(x) - 3\sin(x) + 2 = 0$$
+
+Bài 2. Một hộp chứa $5$ quả cầu đỏ và $7$ quả cầu xanh.
+Tính xác suất $P$ để lấy được ít nhất một quả cầu màu đỏ khi lấy ngẫu nhiên $3$ quả cầu từ hộp.
+
+Giải:
+Tổng số cách chọn $3$ quả cầu bất kỳ là:
+$$N = C_{12}^3 = \\frac{12!}{3!9!} = 220$$
+
+Chúc các em học sinh làm bài tốt!`;
+
+// ============================================================
+// KHỞI CHẠY ỨNG DỤNG
+// ============================================================
+window.addEventListener('DOMContentLoaded', () => {
+  initUI();
+  loadSavedTheme();
+  loadInitialEditorContent();
+  renderDrafts();
+  initHistory();
+});
+
+function initUI() {
+  // Build templates
+  buildGrid('algebra-templates', ALGEBRA_TEMPLATES, true);
+  buildGrid('geometry-templates', GEOMETRY_TEMPLATES, true);
+  buildGrid('stat-templates', STAT_TEMPLATES, true);
+  buildGrid('exam-structural-templates', EXAM_STRUCTURAL_TEMPLATES, false);
+  buildGrid('math-layout-templates', MATH_LAYOUT_TEMPLATES, false);
+  
+  // Build symbol grids
+  buildSymbolGrid('greek-grid', GREEK_SYMBOLS);
+  buildSymbolGrid('operator-grid', OPERATOR_SYMBOLS);
+  buildSymbolGrid('logic-grid', LOGIC_SYMBOLS);
+  buildSymbolGrid('fraction-grid', FRACTION_SYMBOLS);
+
+  // Khởi động giao diện Word-Style mặc định là Phân số
+  selectWordTemplate('frac');
+}
+
+function buildGrid(elementId, dataset, isGridStyle) {
+  const container = document.getElementById(elementId);
+  if (!container) return; // Bảo vệ chống lỗi khi elementId không tồn tại trong DOM
+  container.innerHTML = '';
+  
+  dataset.forEach(item => {
+    const btn = document.createElement('button');
+    if (isGridStyle) {
+      btn.className = "p-2 text-left text-xs bg-slate-50 hover:bg-indigo-50 dark:bg-slate-900/40 dark:hover:bg-slate-700 rounded-lg border border-slate-200/60 dark:border-slate-700/60 hover:border-brand-500 dark:hover:border-indigo-400 transition-all truncate";
+      btn.innerHTML = `
+        <div class="font-medium text-slate-700 dark:text-slate-200 truncate">${item.name}</div>
+        <div class="text-[10px] text-slate-400 font-mono truncate mt-0.5">${item.latex}</div>
+      `;
+    } else {
+      btn.className = "w-full p-2.5 text-left text-xs bg-slate-50 hover:bg-brand-50/50 dark:bg-slate-900/40 dark:hover:bg-slate-700 rounded-lg border border-slate-200/60 dark:border-slate-700/60 hover:border-brand-500 dark:hover:border-indigo-400 transition-all flex flex-col gap-1";
+      btn.innerHTML = `
+        <div class="font-bold text-slate-800 dark:text-slate-200">${item.name}</div>
+        <pre class="text-[10px] text-slate-500 font-mono overflow-x-hidden whitespace-nowrap text-ellipsis">${item.latex}</pre>
+      `;
+    }
+    
+    btn.onclick = () => {
+      if (currentDocMode === 'sandbox') {
+        insertAtCursor(item.latex);
+      } else {
+        const formatted = isGridStyle ? ` $${item.latex}$ ` : `\n${item.latex}\n`;
+        insertAtCursor(formatted);
+      }
+      showToast(`Đã chèn mẫu: ${item.name}`, 'success');
+    };
+    container.appendChild(btn);
+  });
+}
+
+function buildSymbolGrid(elementId, dataset) {
+  const container = document.getElementById(elementId);
+  if (!container) return; // Bảo vệ chống lỗi khi elementId không tồn tại trong DOM
+  container.innerHTML = '';
+  
+  dataset.forEach(item => {
+    const btn = document.createElement('button');
+    btn.className = "aspect-square flex items-center justify-center text-sm font-semibold rounded bg-slate-50 hover:bg-indigo-50 dark:bg-slate-900/60 dark:hover:bg-slate-700 border border-slate-150 dark:border-slate-750 hover:border-brand-500 dark:hover:border-indigo-400 transition-all text-slate-700 dark:text-slate-200";
+    btn.textContent = item.sym;
+    btn.title = item.latex;
+    btn.onclick = () => {
+      let codeToInsert = item.latex;
+      if (currentDocMode === 'document') {
+        const input = document.getElementById('latexInput');
+        const s = input.selectionStart;
+        const textBefore = input.value.substring(0, s);
+        
+        const countDollars = (textBefore.match(/\$/g) || []).length;
+        if (countDollars % 2 === 0) {
+          codeToInsert = `$${codeToInsert}$`;
         }
-    </script>
+      }
+      insertAtCursor(codeToInsert);
+    };
+    container.appendChild(btn);
+  });
+}
+
+// ============================================================
+// ĐIỀU KHIỂN CHẾ ĐỘ BIÊN SOẠN
+// ============================================================
+function setDocMode(mode) {
+  if (currentDocMode === mode) return;
+  
+  const sandboxBtn = document.getElementById('mode-sandbox-btn');
+  const docBtn = document.getElementById('mode-doc-btn');
+  const textarea = document.getElementById('latexInput');
+  
+  const previousValue = textarea.value;
+  
+  currentDocMode = mode;
+  
+  if (mode === 'sandbox') {
+    sandboxBtn.className = "px-4 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 flex items-center gap-2 bg-white dark:bg-slate-800 shadow text-brand-600 dark:text-indigo-400";
+    docBtn.className = "px-4 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100";
+    textarea.placeholder = "Viết một biểu thức Toán duy nhất tại đây (Không cần bọc cặp dấu $)...";
+    
+    if (previousValue.includes('\n') || previousValue.length > 200) {
+      textarea.value = SANDBOX_INIT_VALUE;
+    }
+  } else {
+    docBtn.className = "px-4 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 flex items-center gap-2 bg-white dark:bg-slate-800 shadow text-brand-600 dark:text-indigo-400";
+    sandboxBtn.className = "px-4 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100";
+    textarea.placeholder = "Ví dụ công thức nội dòng: Cho tam giác vuông có cạnh huyền $a = \\sqrt{b^2 + c^2}$...";
+    
+    if (previousValue === SANDBOX_INIT_VALUE) {
+      textarea.value = DOCUMENT_INIT_VALUE;
+    }
+  }
+  
+  handleInput();
+  showToast(`Đã chuyển sang chế độ: ${mode === 'sandbox' ? 'Soạn công thức lẻ' : 'Soạn đề thi & bài tập'}`, 'info');
+}
+
+function loadInitialEditorContent() {
+  const textarea = document.getElementById('latexInput');
+  setDocMode('document');
+  textarea.value = DOCUMENT_INIT_VALUE;
+  handleInput();
+}
+
+// ============================================================
+// HỆ THỐNG PHÍM VÀ NHẬP LIỆU
+// ============================================================
+function handleInput() {
+  const val = document.getElementById('latexInput').value;
+  document.getElementById('char-count').textContent = `${val.length} ký tự`;
+  
+  const statusEl = document.getElementById('render-status');
+  statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span> Đang xử lý...`;
+  
+  clearTimeout(renderTimeout);
+  renderTimeout = setTimeout(triggerMathRender, 300);
+
+  // Cơ chế tự động lưu trạng thái (Undo) sau khi ngừng gõ 800ms
+  clearTimeout(typingTimer);
+  typingTimer = setTimeout(() => {
+    saveState();
+  }, 800);
+}
+
+function handleSpecialKeys(e) {
+  if (e.key === 'Tab') {
+    e.preventDefault();
+    insertAtCursor('  ');
+  }
+  
+  // Phím tắt Hoàn tác: Ctrl + Z hoặc Cmd + Z
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
+    e.preventDefault();
+    triggerUndo();
+  }
+
+  // Phím tắt Làm lại: Ctrl + Y hoặc Cmd + Y (hoặc Ctrl + Shift + Z)
+  if ((e.ctrlKey || e.metaKey) && (e.key.toLowerCase() === 'y' || (e.shiftKey && e.key.toLowerCase() === 'z'))) {
+    e.preventDefault();
+    triggerRedo();
+  }
+}
+
+function insertAtCursor(text) {
+  const ta = document.getElementById('latexInput');
+  const start = ta.selectionStart;
+  const end = ta.selectionEnd;
+  const originalVal = ta.value;
+  
+  ta.value = originalVal.substring(0, start) + text + originalVal.substring(end);
+  ta.selectionStart = ta.selectionEnd = start + text.length;
+  ta.focus();
+  handleInput();
+  saveState(); // Lưu lịch sử ngay lập tức sau hành động chèn tự động
+}
+
+function wrapSelectionWith(openTag, closeTag) {
+  const ta = document.getElementById('latexInput');
+  const start = ta.selectionStart;
+  const end = ta.selectionEnd;
+  const originalVal = ta.value;
+  const selectedText = originalVal.substring(start, end);
+  
+  const wrapped = openTag + selectedText + closeTag;
+  ta.value = originalVal.substring(0, start) + wrapped + originalVal.substring(end);
+  ta.selectionStart = start + openTag.length;
+  ta.selectionEnd = start + openTag.length + selectedText.length;
+  ta.focus();
+  handleInput();
+  saveState(); // Lưu trạng thái
+}
+
+function insertCustomCode(type) {
+  if (type === 'bold') {
+    wrapSelectionWith('\\textbf{', '}');
+  } else if (type === 'italic') {
+    wrapSelectionWith('\\textit{', '}');
+  } else if (type === 'underline') {
+    wrapSelectionWith('\\underline{', '}');
+  } else if (type === 'align-left') {
+    wrapSelectionWith('\\begin{flushleft}\n', '\n\\end{flushleft}');
+  } else if (type === 'align-center') {
+    wrapSelectionWith('\\begin{center}\n', '\n\\end{center}');
+  } else if (type === 'align-right') {
+    wrapSelectionWith('\\begin{flushright}\n', '\n\\end{flushright}');
+  } else if (type === 'align-justify') {
+    wrapSelectionWith('\\begin{justify}\n', '\n\\end{justify}');
+  }
+}
+
+function clearEditor() {
+  document.getElementById('latexInput').value = '';
+  handleInput();
+  saveState();
+  showToast('Đã xóa trắng trình soạn thảo', 'info');
+}
+
+function escapeHtml(text) {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+// ============================================================
+// BỘ DỊCH TỪNG ĐOẠN ĐỊNH DẠNG & TRUYỀN PHÒNG VỆ NESTED LATEX
+// ============================================================
+function parseLatexFormatting(text) {
+  let prevText;
+  // Vòng lặp đệ quy xử lý các thẻ định dạng lồng nhau từ trong ra ngoài một cách an toàn
+  do {
+    prevText = text;
+    text = text.replace(/\\textbf\{((?:[^{}]+|\{[^{}]*\})*)\}/g, '<strong>$1</strong>');
+    text = text.replace(/\\textit\{((?:[^{}]+|\{[^{}]*\})*)\}/g, '<em>$1</em>');
+    text = text.replace(/\\underline\{((?:[^{}]+|\{[^{}]*\})*)\}/g, '<u class="underline decoration-1 decoration-slate-400 dark:decoration-slate-500">$1</u>');
+  } while (text !== prevText);
+
+  // Phân dịch định dạng các khối căn dòng của LaTeX sang khối div HTML tương đương
+  text = text.replace(/\\begin\{center\}([\s\S]*?)\\end\{center\}/g, '<div class="text-center w-full">$1</div>');
+  text = text.replace(/\\begin\{flushleft\}([\s\S]*?)\\end\{flushleft\}/g, '<div class="text-left w-full">$1</div>');
+  text = text.replace(/\\begin\{flushright\}([\s\S]*?)\\end\{flushright\}/g, '<div class="text-right w-full">$1</div>');
+  text = text.replace(/\\begin\{justify\}([\s\S]*?)\\end\{justify\}/g, '<div class="text-justify w-full">$1</div>');
+
+  return text;
+}
+
+// ============================================================
+// BỘ ĐIỀU KHIỂN HOÀN TÁC / LÀM LẠI (UNDO / REDO)
+// ============================================================
+function initHistory() {
+  const val = document.getElementById('latexInput').value;
+  undoStack = [val];
+  redoStack = [];
+  updateUndoRedoButtons();
+}
+
+function saveState() {
+  if (isUndoingOrRedoing) return;
+  const currentVal = document.getElementById('latexInput').value;
+  
+  // Chỉ lưu nếu có thay đổi so với trạng thái trên cùng của Stack
+  if (undoStack.length === 0 || undoStack[undoStack.length - 1] !== currentVal) {
+    undoStack.push(currentVal);
+    if (undoStack.length > 50) {
+      undoStack.shift(); // Giới hạn bộ nhớ tối đa 50 bước
+    }
+    redoStack = []; // Reset Redo stack khi người dùng có hành động nhập liệu mới
+    updateUndoRedoButtons();
+  }
+}
+
+function triggerUndo() {
+  if (undoStack.length > 1) {
+    isUndoingOrRedoing = true;
+    const current = undoStack.pop();
+    redoStack.push(current);
+    
+    const previous = undoStack[undoStack.length - 1];
+    document.getElementById('latexInput').value = previous;
+    
+    // Đồng bộ lại giao diện
+    handleInput();
+    isUndoingOrRedoing = false;
+    updateUndoRedoButtons();
+    showToast('Đã hoàn tác hành động', 'info');
+  }
+}
+
+function triggerRedo() {
+  if (redoStack.length > 0) {
+    isUndoingOrRedoing = true;
+    const next = redoStack.pop();
+    undoStack.push(next);
+    
+    document.getElementById('latexInput').value = next;
+    
+    // Đồng bộ lại giao diện
+    handleInput();
+    isUndoingOrRedoing = false;
+    updateUndoRedoButtons();
+    showToast('Đã làm lại hành động', 'info');
+  }
+}
+
+function updateUndoRedoButtons() {
+  const undoBtn = document.getElementById('btn-undo');
+  const redoBtn = document.getElementById('btn-redo');
+  
+  if (undoBtn) {
+    if (undoStack.length > 1) {
+      undoBtn.disabled = false;
+      undoBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+      undoBtn.classList.add('hover:text-slate-800', 'dark:hover:text-slate-100');
+    } else {
+      undoBtn.disabled = true;
+      undoBtn.classList.add('opacity-40', 'cursor-not-allowed');
+      undoBtn.classList.remove('hover:text-slate-800', 'dark:hover:text-slate-100');
+    }
+  }
+  
+  if (redoBtn) {
+    if (redoStack.length > 0) {
+      redoBtn.disabled = false;
+      redoBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+      redoBtn.classList.add('hover:text-slate-800', 'dark:hover:text-slate-100');
+    } else {
+      redoBtn.disabled = true;
+      redoBtn.classList.add('opacity-40', 'cursor-not-allowed');
+      redoBtn.classList.remove('hover:text-slate-800', 'dark:hover:text-slate-100');
+    }
+  }
+}
+
+// ============================================================
+// BIÊN DỊCH MATHJAX AN TOÀN & BẢO VỆ CÚ PHÁP
+// ============================================================
+async function triggerMathRender() {
+  const rawText = document.getElementById('latexInput').value.trim();
+  const preview = document.getElementById('previewArea');
+  const statusEl = document.getElementById('render-status');
+  
+  if (!rawText) {
+    preview.innerHTML = `<p class="text-slate-400 dark:text-slate-500 italic text-center mt-12">Nội dung đề bài hoặc công thức sau khi biên dịch sẽ hiển thị trực quan ở đây.</p>`;
+    statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-slate-400"></span> Trống`;
+    return;
+  }
+  
+  let secureText = escapeHtml(rawText);
+  
+  if (currentDocMode === 'sandbox') {
+    secureText = `\\[ ${secureText} \\]`;
+  }
+  
+  // Áp dụng bộ giải thuật dịch định dạng chữ in đậm, in nghiêng, gạch chân và căn lề
+  secureText = parseLatexFormatting(secureText);
+  
+  preview.innerHTML = secureText;
+  
+  try {
+    if (window.MathJax && MathJax.typesetPromise) {
+      await MathJax.typesetPromise([preview]);
+      statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-500"></span> Đã đồng bộ`;
+    } else {
+      statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-red-400"></span> Đang tải bộ dựng...`;
+    }
+  } catch (err) {
+    statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-red-500"></span> Lỗi biên dịch`;
+    console.error('MathJax Render Error:', err);
+  }
+}
+
+function updatePreviewSize() {
+  const size = document.getElementById('preview-font-size').value;
+  const preview = document.getElementById('previewArea');
+  preview.classList.remove('text-sm', 'text-base', 'text-lg', 'text-xl');
+  preview.classList.add(size);
+}
+
+// ============================================================
+// HỆ THỐNG BIỂU MẪU ĐIỀN THÔNG TIN NO-CODE (LOW-TECH FRIENDLY)
+// ============================================================
+
+// Lựa chọn bộ dựng mô hình trực quan Word-Style
+function selectWordTemplate(type) {
+  currentWordTemplate = type;
+  
+  // Danh sách đầy đủ 10 mô hình trực quan
+  const templates = ['frac', 'sqrt', 'pow', 'log', 'lim', 'sigma', 'integral', 'vector', 'system', 'matrix'];
+  templates.forEach(t => {
+    const btn = document.getElementById(`btn-w-${t}`);
+    if (btn) {
+      if (t === type) {
+        btn.className = "py-1.5 text-[11px] font-semibold rounded-lg border bg-brand-50 dark:bg-brand-950/40 border-brand-500 text-brand-600 dark:text-indigo-400 transition-all text-center";
+      } else {
+        btn.className = "py-1.5 text-[11px] font-semibold rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all text-center";
+      }
+    }
+    
+    // Ẩn/hiện các khối nhập liệu tương ứng
+    const holder = document.getElementById(`w-holder-${t}`);
+    if (holder) {
+      if (t === type) {
+        holder.classList.remove('hidden');
+      } else {
+        holder.classList.add('hidden');
+      }
+    }
+  });
+}
+
+// Hàm sinh công thức dựa trên mô hình trực quan (Word-Style) được chọn
+function insertWordStyleFormula() {
+  let mml = "";
+  
+  switch(currentWordTemplate) {
+    case 'frac': {
+      const num = document.getElementById('w-frac-num').value.trim() || "?";
+      const den = document.getElementById('w-frac-den').value.trim() || "?";
+      mml = `\\frac{${num}}{${den}}`;
+      document.getElementById('w-frac-num').value = '';
+      document.getElementById('w-frac-den').value = '';
+      break;
+    }
+    case 'sqrt': {
+      const val = document.getElementById('w-sqrt-val').value.trim() || "?";
+      mml = `\\sqrt{${val}}`;
+      document.getElementById('w-sqrt-val').value = '';
+      break;
+    }
+    case 'pow': {
+      const base = document.getElementById('w-pow-base').value.trim() || "?";
+      const exp = document.getElementById('w-pow-exp').value.trim() || "?";
+      mml = `${base}^{${exp}}`;
+      document.getElementById('w-pow-base').value = '';
+      document.getElementById('w-pow-exp').value = '';
+      break;
+    }
+    case 'log': {
+      const base = document.getElementById('w-log-base').value.trim() || "a";
+      const expr = document.getElementById('w-log-expr').value.trim() || "?";
+      mml = `\\log_{${base}}(${expr})`;
+      document.getElementById('w-log-base').value = '';
+      document.getElementById('w-log-expr').value = '';
+      break;
+    }
+    case 'lim': {
+      const sub = document.getElementById('w-lim-sub').value.trim() || "x \\to 0";
+      const expr = document.getElementById('w-lim-expr').value.trim() || "?";
+      mml = `\\lim_{${sub}} ${expr}`;
+      document.getElementById('w-lim-sub').value = '';
+      document.getElementById('w-lim-expr').value = '';
+      break;
+    }
+    case 'sigma': {
+      const top = document.getElementById('w-sigma-top').value.trim() || "n";
+      const bottom = document.getElementById('w-sigma-bottom').value.trim() || "i=1";
+      const expr = document.getElementById('w-sigma-expr').value.trim() || "?";
+      mml = `\\sum_{${bottom}}^{${top}} {${expr}}`;
+      document.getElementById('w-sigma-top').value = '';
+      document.getElementById('w-sigma-bottom').value = '';
+      document.getElementById('w-sigma-expr').value = '';
+      break;
+    }
+    case 'integral': {
+      const top = document.getElementById('w-integral-top').value.trim() || "b";
+      const bottom = document.getElementById('w-integral-bottom').value.trim() || "a";
+      const expr = document.getElementById('w-integral-expr').value.trim() || "?";
+      mml = `\\int_{${bottom}}^{${top}} {${expr} \\, dx}`;
+      document.getElementById('w-integral-top').value = '';
+      document.getElementById('w-integral-bottom').value = '';
+      document.getElementById('w-integral-expr').value = '';
+      break;
+    }
+    case 'vector': {
+      const val = document.getElementById('w-vector-val').value.trim() || "u";
+      mml = `\\vec{${val}}`;
+      document.getElementById('w-vector-val').value = '';
+      break;
+    }
+    case 'system': {
+      const eq1 = document.getElementById('w-system-eq1').value.trim() || "?";
+      const eq2 = document.getElementById('w-system-eq2').value.trim() || "?";
+      mml = `\\begin{cases} ${eq1} \\\\ ${eq2} \\end{cases}`;
+      document.getElementById('w-system-eq1').value = '';
+      document.getElementById('w-system-eq2').value = '';
+      break;
+    }
+    case 'matrix': {
+      const m11 = document.getElementById('w-matrix-11').value.trim() || "0";
+      const m12 = document.getElementById('w-matrix-12').value.trim() || "0";
+      const m21 = document.getElementById('w-matrix-21').value.trim() || "0";
+      const m22 = document.getElementById('w-matrix-22').value.trim() || "0";
+      mml = `\\begin{pmatrix} ${m11} & ${m12} \\\\ ${m21} & ${m22} \\end{pmatrix}`;
+      document.getElementById('w-matrix-11').value = '';
+      document.getElementById('w-matrix-12').value = '';
+      document.getElementById('w-matrix-21').value = '';
+      document.getElementById('w-matrix-22').value = '';
+      break;
+    }
+  }
+
+  // Nếu ở chế độ Document, tự động thêm dấu $ bao quanh công thức
+  if (currentDocMode === 'document') {
+    const input = document.getElementById('latexInput');
+    const s = input.selectionStart;
+    const textBefore = input.value.substring(0, s);
+    const countDollars = (textBefore.match(/\$/g) || []).length;
+    
+    if (countDollars % 2 === 0) {
+      mml = `$${mml}$`;
+    }
+  }
+  
+  insertAtCursor(mml);
+  showToast('Đã chèn công thức thành công!', 'success');
+}
+
+// Điền Form câu hỏi trắc nghiệm tự động căn lề hoàn chỉnh
+function insertFormQuestion() {
+  const qNum = document.getElementById('form-q-num').value.trim() || "Câu 1";
+  const qText = document.getElementById('form-q-text').value.trim();
+  const optA = document.getElementById('form-q-a').value.trim();
+  const optB = document.getElementById('form-q-b').value.trim();
+  const optC = document.getElementById('form-q-c').value.trim();
+  const optD = document.getElementById('form-q-d').value.trim();
+  
+  if (!qText) {
+    showToast('Vui lòng nhập nội dung câu hỏi trước!', 'error');
+    return;
+  }
+  
+  let result = `${qNum}. ${qText}\n\n`;
+  if (optA) result += `A. $${optA}$.\n`;
+  if (optB) result += `B. $${optB}$.\n`;
+  if (optC) result += `C. $${optC}$.\n`;
+  if (optD) result += `D. $${optD}$.\n`;
+  
+  insertAtCursor(result + "\n");
+  showToast(`Đã tạo câu hỏi: ${qNum}`, 'success');
+  
+  // Tự động tăng câu số tiếp theo cho thầy cô dễ làm câu mới
+  const match = qNum.match(/\d+/);
+  if (match) {
+    const nextNum = parseInt(match[0]) + 1;
+    document.getElementById('form-q-num').value = qNum.replace(/\d+/, nextNum);
+  }
+  // Reset nội dung câu cũ
+  document.getElementById('form-q-text').value = '';
+  document.getElementById('form-q-a').value = '';
+  document.getElementById('form-q-b').value = '';
+  document.getElementById('form-q-c').value = '';
+  document.getElementById('form-q-d').value = '';
+}
+
+// ============================================================
+// HỆ THỐNG LƯU NHÁP & LỊCH SỬ CHO GIÁO VIÊN
+// ============================================================
+function saveCurrentToDraft() {
+  const val = document.getElementById('latexInput').value.trim();
+  if (!val) {
+    showToast('Không có nội dung để lưu!', 'error');
+    return;
+  }
+  
+  const namePrompt = `Nhập tên hoặc tiêu đề lưu nháp (Ví dụ: Đại số 10 - Tiết 1):`;
+  const draftName = prompt(namePrompt, `Bản nháp toán ${new Date().toLocaleDateString('vi-VN')}`);
+  
+  if (draftName === null) return;
+  
+  const finalName = draftName.trim() || `Bản nháp không tên`;
+  const newDraft = {
+    id: Date.now().toString(),
+    title: finalName,
+    content: val,
+    mode: currentDocMode,
+    timestamp: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })
+  };
+  
+  savedDrafts.unshift(newDraft);
+  localStorage.setItem('7math_teacher_drafts', JSON.stringify(savedDrafts));
+  renderDrafts();
+  showToast(`Đã lưu nháp: ${finalName}`, 'success');
+}
+
+function renderDrafts() {
+  const list = document.getElementById('saved-drafts-list');
+  list.innerHTML = '';
+  
+  if (savedDrafts.length === 0) {
+    list.innerHTML = `<p class="text-xs text-slate-400 italic text-center py-2">Chưa có nháp lưu trữ nào</p>`;
+    return;
+  }
+  
+  savedDrafts.forEach(draft => {
+    const item = document.createElement('div');
+    item.className = "flex items-center justify-between gap-2 p-1.5 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700/80 hover:border-brand-500 transition-all text-xs";
+    item.innerHTML = `
+      <button onclick="loadDraft('${draft.id}')" class="flex-1 text-left truncate font-medium text-slate-700 dark:text-slate-300 hover:text-brand-600 dark:hover:text-indigo-400 transition">
+        ${draft.title} <span class="text-[9px] text-slate-400">(${draft.timestamp})</span>
+      </button>
+      <button onclick="deleteDraft(event, '${draft.id}')" class="text-slate-400 hover:text-red-500 p-0.5">✕</button>
+    `;
+    list.appendChild(item);
+  });
+}
+
+function loadDraft(id) {
+  const draft = savedDrafts.find(d => d.id === id);
+  if (!draft) return;
+  
+  if (draft.mode && draft.mode !== currentDocMode) {
+    setDocMode(draft.mode);
+  }
+  
+  document.getElementById('latexInput').value = draft.content;
+  handleInput();
+  showToast(`Đã tải nháp: ${draft.title}`, 'success');
+}
+
+function deleteDraft(event, id) {
+  event.stopPropagation();
+  savedDrafts = savedDrafts.filter(d => d.id !== id);
+  localStorage.setItem('7math_teacher_drafts', JSON.stringify(savedDrafts));
+  renderDrafts();
+  showToast('Đã xóa bản nháp', 'info');
+}
+
+function clearSavedDrafts() {
+  if (confirm('Thầy cô có chắc chắn muốn xóa toàn bộ danh sách bản nháp không?')) {
+    savedDrafts = [];
+    localStorage.removeItem('7math_teacher_drafts');
+    renderDrafts();
+    showToast('Đã dọn sạch kho lưu trữ nháp', 'success');
+  }
+}
+
+// ============================================================
+// HỆ THỐNG XUẤT PDF / IN ẤN TIÊU CHUẨN
+// ============================================================
+
+function exportToPDF() {
+  const val = document.getElementById('latexInput').value.trim();
+  if (!val) {
+    showToast('Chưa soạn thảo nội dung nào để in!', 'error');
+    return;
+  }
+  
+  showToast('Đang tối ưu hóa trang in... Vui lòng chọn "Lưu dưới dạng PDF" ở hộp thoại sau đó.', 'info');
+  
+  setTimeout(() => {
+    window.print();
+  }, 500);
+}
+
+function copyPlainLaTeX() {
+  const val = document.getElementById('latexInput').value;
+  if (!val.trim()) return showToast('Không có dữ liệu để sao chép', 'error');
+  
+  navigator.clipboard.writeText(val).then(() => {
+    showToast('Đã sao chép mã nguồn LaTeX gốc!', 'success');
+  }).catch(() => {
+    fallbackCopy(val, 'Đã sao chép mã nguồn LaTeX gốc!');
+  });
+}
+
+function copyLmsCode() {
+  const val = document.getElementById('latexInput').value.trim();
+  if (!val) return showToast('Không có dữ liệu', 'error');
+  
+  let formatted = val;
+  if (currentDocMode === 'sandbox') {
+    formatted = `\\(${val}\\)`;
+  }
+  
+  navigator.clipboard.writeText(formatted).then(() => {
+    showToast('Đã copy mã định dạng chuẩn LMS!', 'success');
+  }).catch(() => {
+    fallbackCopy(formatted, 'Đã copy mã định dạng chuẩn LMS!');
+  });
+}
+
+function copyRichText() {
+  const preview = document.getElementById('previewArea');
+  const val = document.getElementById('latexInput').value.trim();
+  if (!val) return showToast('Không có nội dung để sao chép!', 'error');
+  
+  try {
+    const type = "text/html";
+    const blob = new Blob([preview.innerHTML], { type });
+    const data = [new ClipboardItem({ [type]: blob })];
+    
+    navigator.clipboard.write(data).then(() => {
+      showToast('Đã sao chép định dạng trang hiển thị thành công!', 'success');
+    }).catch(err => {
+      fallbackCopy(preview.innerText, 'Chuyển sang sao chép văn bản thường.');
+    });
+  } catch (e) {
+    showToast('Trình duyệt không hỗ trợ sao chép kiểu này.', 'error');
+  }
+}
+
+function fallbackCopy(text, successMsg) {
+  const tempTa = document.createElement('textarea');
+  tempTa.value = text;
+  document.body.appendChild(tempTa);
+  tempTa.select();
+  document.execCommand('copy');
+  document.body.removeChild(tempTa);
+  showToast(successMsg, 'success');
+}
+
+// ============================================================
+// GIAO DIỆN & TIỆN ÍCH KHÁC
+// ============================================================
+function switchSidebarTab(tab) {
+  document.querySelectorAll('[id^="side-tab-"]').forEach(el => {
+    el.className = "flex-1 py-2 text-xs font-semibold rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100";
+  });
+  document.querySelectorAll('[id^="side-panel-"]').forEach(el => el.classList.add('hidden'));
+  
+  const activeBtn = document.getElementById(`side-tab-${tab}`);
+  activeBtn.className = "flex-1 py-2 text-xs font-semibold rounded-lg text-brand-600 dark:text-indigo-400 bg-white dark:bg-slate-800 shadow";
+  
+  document.getElementById(`side-panel-${tab}`).classList.remove('hidden');
+  activeSidebarTab = tab;
+}
+
+function openModal(id) {
+  const modal = document.getElementById(`modal-${id}`);
+  modal.classList.remove('opacity-0', 'pointer-events-none');
+  modal.firstElementChild.classList.remove('scale-95');
+  modal.firstElementChild.classList.add('scale-100');
+}
+
+function closeModal(id) {
+  const modal = document.getElementById(`modal-${id}`);
+  modal.classList.add('opacity-0', 'pointer-events-none');
+  modal.firstElementChild.classList.remove('scale-100');
+  modal.firstElementChild.classList.add('scale-95');
+}
+
+function showToast(msg, type = 'info') {
+  const container = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  
+  let bgClass = "bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100";
+  let icon = "ℹ️";
+  
+  if (type === 'success') {
+    bgClass = "bg-emerald-50 dark:bg-emerald-950/90 border-emerald-200 dark:border-emerald-800/80 text-emerald-800 dark:text-emerald-300";
+    icon = "✓";
+  } else if (type === 'error') {
+    bgClass = "bg-rose-50 dark:bg-rose-950/90 border-rose-200 dark:border-rose-800/80 text-rose-800 dark:text-rose-300";
+    icon = "✕";
+  }
+  
+  toast.className = `flex items-center gap-2 px-4 py-3 rounded-xl border shadow-lg text-xs font-semibold animate-slide-in transition-all duration-200 ${bgClass}`;
+  toast.innerHTML = `<span class="flex-shrink-0 w-4 h-4 flex items-center justify-center rounded-full bg-current/10">${icon}</span> <span>${msg}</span>`;
+  
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(10px)';
+    setTimeout(() => toast.remove(), 250);
+  }, 3500);
+}
+
+function toggleTheme() {
+  const isDark = document.documentElement.classList.contains('dark');
+  if (isDark) {
+    document.documentElement.classList.remove('dark');
+    document.getElementById('theme-toggle').textContent = '🌙';
+    localStorage.setItem('7math_theme_preference', 'light');
+  } else {
+    document.documentElement.classList.add('dark');
+    document.getElementById('theme-toggle').textContent = '☀️';
+    localStorage.setItem('7math_theme_preference', 'dark');
+  }
+}
+
+function loadSavedTheme() {
+  const pref = localStorage.getItem('7math_theme_preference');
+  if (pref === 'dark' || (!pref && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+    document.getElementById('theme-toggle').textContent = '☀️';
+  } else {
+    document.documentElement.classList.remove('dark');
+    document.getElementById('theme-toggle').textContent = '🌙';
+  }
+}
+</script>
 </body>
 </html>
-
